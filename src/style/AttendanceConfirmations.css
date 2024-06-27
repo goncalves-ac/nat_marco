@@ -1,0 +1,37 @@
+/* AttendanceConfirmations.css */
+.attendance-confirmations-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .attendance-confirmations-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .attendance-confirmations-container p {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .attendance-confirmations-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .attendance-confirmations-container li {
+    background: #ffffff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .attendance-confirmations-container li p {
+    margin: 0;
+  }
+  

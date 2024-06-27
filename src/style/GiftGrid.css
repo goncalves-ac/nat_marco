@@ -1,0 +1,40 @@
+.gift-grid-container {
+  display: flex;
+  justify-content: center;
+}
+
+.gift-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1000px; /* Define a largura máxima do container */
+  padding: 16px;
+}
+
+.gift-card {
+  width: calc(25% - 16px); /* Ajusta o tamanho do card para ocupar 25% da largura do container */
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gift-card img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.gift-card-content {
+  padding: 16px;
+}
+
+.gift-card h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.gift-card p {
+  margin-bottom: 8px;
+}

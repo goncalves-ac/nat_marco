@@ -1,0 +1,63 @@
+import React, { useState } from 'react';
+import './../style/GiftGrid.css';
+
+import Card from './../component/Card.js'; 
+import Menu from './../component/Menu.js';
+import Countdown from './../component/Countdown.js';
+import GiftPagination from './../component/GiftPagination.js';
+
+const importAll = (requireContext) => {
+  return requireContext.keys().map(requireContext);
+};
+
+const images = importAll(require.context('./../img/gifts', false, /\.(jpg|jpeg|png|gif)$/));
+
+const parseImageName = (filename) => {
+  const [title, priceWithExt] = filename.split('-');
+  const price = `R$ ${priceWithExt.split('.')[0]}`;
+  const formattedTitle = title.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+  return { title: formattedTitle, price };
+};
+
+const gifts = images.map((image) => {
+  const filename = image.split('/').pop();
+  const { title, price } = parseImageName(filename);
+  return { src: image, title, price, description: "Uma descrição personalizada." };
+});
+
+const GiftGrid = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentGifts = gifts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  return (
+    <section>
+      <Menu />
+      <Countdown targetDate="2025-01-05T00:00:00" />
+      <div className="gift-grid">
+        {currentGifts.map((gift, index) => (
+          <Card
+            key={index}
+            src={gift.src}
+            title={gift.title}
+            price={gift.price}
+            description={gift.description}
+          />
+        ))}
+      </div>
+      <GiftPagination 
+        totalItems={gifts.length} 
+        itemsPerPage={itemsPerPage} 
+        onPageChange={handlePageChange} 
+      />
+    </section>
+  );
+};
+
+export default GiftGrid;
