@@ -1,37 +1,71 @@
 /* AttendanceConfirmations.css */
 .attendance-confirmations-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.attendance-confirmations-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.attendance-confirmations-container p {
+  text-align: center;
+  font-weight: bold;
+}
+
+.attendance-confirmations-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.attendance-confirmations-container li {
+  background: #ffffff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .attendance-confirmations-container {
+      padding: 15px;
   }
-  
+
   .attendance-confirmations-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+      font-size: 1.5em;
   }
-  
+
   .attendance-confirmations-container p {
-    text-align: center;
-    font-weight: bold;
+      font-size: 1em;
   }
-  
-  .attendance-confirmations-container ul {
-    list-style: none;
-    padding: 0;
-  }
-  
+
   .attendance-confirmations-container li {
-    background: #ffffff;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      font-size: 0.9em;
   }
-  
-  .attendance-confirmations-container li p {
-    margin: 0;
+}
+
+@media (max-width: 480px) {
+  .attendance-confirmations-container h2 {
+      font-size: 1.2em;
   }
-  
+
+  .attendance-confirmations-container p {
+      font-size: 0.9em;
+  }
+
+  .attendance-confirmations-container li {
+      padding: 8px;
+      font-size: 0.8em;
+  }
+}

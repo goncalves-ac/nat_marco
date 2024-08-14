@@ -1,6 +1,7 @@
 .gift-grid-container {
   display: flex;
   justify-content: center;
+  padding: 16px;
 }
 
 .gift-grid {
@@ -8,7 +9,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: 1000px; /* Define a largura máxima do container */
-  padding: 16px;
 }
 
 .gift-card {
@@ -37,4 +37,17 @@
 
 .gift-card p {
   margin-bottom: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .gift-card {
+    width: calc(50% - 16px); /* Ajusta o card para ocupar 50% da largura do container em telas menores */
+  }
+}
+
+@media (max-width: 480px) {
+  .gift-card {
+    width: 100%; /* Ajusta o card para ocupar 100% da largura do container em telas muito pequenas */
+  }
 }

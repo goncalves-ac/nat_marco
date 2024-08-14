@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './../style/GiftGrid.css';
 
 import Card from './../component/Card.js'; 
-import Menu from './../component/Menu.js';
+import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import GiftPagination from './../component/GiftPagination.js';
 
@@ -38,7 +38,7 @@ const GiftGrid = () => {
 
   return (
     <section>
-      <Menu />
+      <NavBar />
       <Countdown targetDate="2025-01-05T00:00:00" />
       <div className="gift-grid">
         {currentGifts.map((gift, index) => (

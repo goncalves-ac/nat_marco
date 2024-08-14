@@ -1,11 +1,15 @@
-// src/components/Countdown.js
 import React, { useEffect, useState } from 'react';
 import './../style/Countdown.css';
 
 const Countdown = ({ targetDate }) => {
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
-    let timeLeft = {};
+    let timeLeft = {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    };
 
     if (difference > 0) {
       timeLeft = {
@@ -32,13 +36,10 @@ const Countdown = ({ targetDate }) => {
   const timerComponents = [];
 
   Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval]) {
-      return;
-    }
-
     timerComponents.push(
       <div key={interval} className="countdown-item">
-        <span>{timeLeft[interval]} {interval}</span>
+        <span className="countdown-value">{timeLeft[interval]}</span>
+        <span className="countdown-label">{interval}</span>
       </div>
     );
   });

@@ -1,7 +1,7 @@
 import React from 'react';
 import './../style/Slideshow.css';
 
-import Menu from './../component/Menu.js';
+import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import Slideshow from '../component/Slideshow.js';
 
@@ -21,7 +21,7 @@ const images = importAll(require.context('../img/PreNatMarcos_Gallery', false, /
 const SlideshowPage = () => {
   return (
     <section>
-      <Menu />
+      <NavBar />
       <Countdown targetDate="2025-01-05T00:00:00" />
       <div>
         <Slideshow images={images} />

@@ -1,18 +1,24 @@
 import React from 'react';
 import './../style/Date.css'
 
-import Menu from '../component/Menu.js';
+import NavBar from './../component/NavBar.js';
 import Countdown from '../component/Countdown.js';
+
+import DESTAQUE from './../img/Destaque.jpg';
+
 
 const VenusMars = () => {
   return (
     <section>
-      <Menu />
+      <NavBar />
       <Countdown targetDate="2025-01-05T00:00:00" />
+      <div className='container-date-center'>
+        <div className='date-center-img'>
+          <img src={DESTAQUE} alt="groom" className="img-responsive" />
+        </div>
         <div className='date-center'>
-          <span>05 / 01 / 2025</span>
-          <h6>FRASE</h6>
-          <i className="fa-solid fa-download"></i>
+          <span>05<br />Janeiro<br />2025</span>
+        </div>
       </div>
     </section>
   );

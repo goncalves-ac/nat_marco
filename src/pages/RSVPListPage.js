@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Menu from './../component/Menu.js';
+import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import RSVPList from './../component/RSVPList.js';
 
@@ -17,7 +17,7 @@ function RSVPListPage() {
 
   return (
     <section>
-      <Menu />
+      <NavBar />
       <Countdown targetDate="2025-01-05T00:00:00" />
       <div className='RSVP'>
         <RSVPList rsvps={rsvps} />

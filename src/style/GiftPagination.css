@@ -23,15 +23,47 @@
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  font-size: 16px;
 }
 
 .pagination button:hover {
   background-color: #643fc1;
   color: #fff;
-  font-size: 18px;
 }
 
 .pagination .active button {
   background-color: #CD7AA3;
   color: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .pagination {
+    bottom: 40px;
+  }
+
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .pagination li {
+    margin: 0 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .pagination li {
+    margin: 2px;
+  }
 }

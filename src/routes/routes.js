@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 /** ROTAS */
-import Home from '../pages/Home.js'
 import Page from '../pages/Page.js';
 import SlideshowPage from '../pages/SlideshowPage.js';
 import GiftGrid from '../pages/GiftGrid.js';
@@ -16,8 +15,7 @@ function routes () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path='/page' element={<Page />} />
+        <Route exact path='/' element={<Page />} />
         <Route path="/SlideshowPage" element={<SlideshowPage />} />
         <Route path="/gifts" element={<GiftGrid />} />
         <Route path="/VenusMars" element={<VenusMars />} />

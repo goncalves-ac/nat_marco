@@ -1,17 +1,20 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import './../style/Page.css';
-
-import Menu from './../component/Menu.js'
-import Countdown from './../component/Countdown.js'
-
 
 function Page() {
 
-    return ( 
-        <section>
-            <Menu />
-            <Countdown targetDate="2025-01-05T00:00:00" />
-        </section>
+    const navigate = useNavigate();
+    const handleClick = () => { 
+        navigate("/VenusMars"); 
+    }
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <button type="button" className="App-button" onClick={ handleClick } >Natália & Marcos</button>
+            </header>
+        </div>
     );
 }
 
