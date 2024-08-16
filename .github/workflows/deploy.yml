@@ -3,10 +3,10 @@ name: Deploy to HostGator
 on:
   push:
     branches:
-      - main  # Use uma lista para especificar o branch
+      - main
   pull_request:
     branches:
-      - main  # Use uma lista para especificar o branch
+      - main
 
 jobs:
   web-deploy:
@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Atualizado para a versão mais recente
+        uses: actions/checkout@v4  # Atualize para a versão mais recente
 
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3  # Atualizado para a versão mais recente
+        uses: actions/setup-node@v3  # Utilize a versão mais recente
         with:
-          node-version: '20'  # Atualizado para a versão Node.js 20
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
