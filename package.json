@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "ftp-deploy": "^2.4.7"
+    "ftp-deploy": "^2.4.7",
+    "npm": "^10.8.2"
   }
 }
