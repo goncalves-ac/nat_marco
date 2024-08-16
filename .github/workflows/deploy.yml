@@ -9,7 +9,7 @@ on:
       - main  # Use uma lista para especificar o branch
 
 jobs:
-  deploy:
+  web-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
 

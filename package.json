@@ -3,22 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@flaticon/flaticon-uicons": "^3.2.1",
-    "@fortawesome/fontawesome-free": "^6.5.2",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@flaticon/flaticon-uicons": "^3.3.1",
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "joi": "^17.13.3",
-    "mongoose": "^8.4.4",
+    "mongoose": "^8.5.3",
     "mysql": "^2.18.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.0",
+    "react-router-dom": "^6.26.1",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^4.2.3"
   },
   "scripts": {
     "build": "react-scripts build",
@@ -46,7 +46,19 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-class-properties": "^7.24.7",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.24.7",
+    "@babel/plugin-transform-numeric-separator": "^7.24.7",
+    "@babel/plugin-transform-optional-chaining": "^7.24.8",
+    "@babel/plugin-transform-private-methods": "^7.24.7",
+    "@eslint/config-array": "^0.18.0",
+    "@eslint/object-schema": "^2.1.4",
+    "@jridgewell/sourcemap-codec": "^1.5.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "ftp-deploy": "^2.4.7",
-    "npm": "^10.8.2"
+    "npm": "^10.8.2",
+    "rimraf": "^4.0.0",
+    "workbox-cacheable-response": "^7.1.0",
+    "workbox-google-analytics": "^7.1.0"
   }
 }
