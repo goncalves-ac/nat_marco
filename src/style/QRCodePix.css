@@ -1,0 +1,34 @@
+.qrcode-container {
+    position: relative;
+}
+  
+.qrcode-image {
+    position: fixed;
+    top: 3vh;
+    right: 3vw;
+    width: auto; /* Ajuste o tamanho conforme necessário */
+    height: 20vh;
+    z-index: 1000;
+}
+
+/* Exibe a imagem e esconde o ícone quando a tela é maior que 768px */
+@media (min-width: 768px) {
+    .qrcode-image {
+        display: block; /* Exibe a imagem */
+    }
+
+    .qrcode-icon {
+        display: none; /* Esconde o ícone */
+    }
+}
+
+/* Exibe o ícone e esconde a imagem quando a tela é menor que 768px */
+@media (max-width: 767px) {
+    .qrcode-image {
+        display: none; /* Esconde a imagem */
+    }
+
+    .qrcode-icon {
+        display: block; /* Exibe o ícone */
+    }
+}

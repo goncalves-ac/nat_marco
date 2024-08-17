@@ -5,6 +5,9 @@ import Card from './../component/Card.js';
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import GiftPagination from './../component/GiftPagination.js';
+import QRCodePix from './../component/QRCodePix.js';
+
+import QRCodePixIMG from './../img/qrcode-pix.png';
 
 const importAll = (requireContext) => {
   return requireContext.keys().map(requireContext);
@@ -25,12 +28,15 @@ const gifts = images.map((image) => {
   return { src: image, title, price, description: "Uma descrição personalizada." };
 });
 
+
 const GiftGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentGifts = gifts.slice(startIndex, endIndex);
+
+  const isMobile = window.innerWidth <= 768; // Ou qualquer lógica para verificar o tamanho da tela
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -39,6 +45,10 @@ const GiftGrid = () => {
   return (
     <section>
       <NavBar />
+      <QRCodePix
+        qrCodeUrl= { QRCodePixIMG } // URL do QRCode
+        mobileView={isMobile}
+      />
       <Countdown targetDate="2025-01-05T00:00:00" />
       <div className="gift-grid">
         {currentGifts.map((gift, index) => (

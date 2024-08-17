@@ -39,6 +39,11 @@ const Navbar = () => {
             <span>Presentes</span>
           </Link>
         </li>
+        <li className="qrcode-icon-container">
+          <Link to="/qrcodepix" className="qrcode-icon">
+            <i className="fa-solid fa-qrcode fa-2x"></i>
+          </Link>
+        </li>
         <li>
           <Link to="/perfil">
             <i className="fa fa-user"></i>

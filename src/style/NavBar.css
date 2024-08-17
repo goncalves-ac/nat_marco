@@ -22,12 +22,6 @@
     width: 4rem; /* Define a largura inicial da barra */
 }
 
-.navbar li:nth-child(6) {
-    margin-top: 5rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid #363664;
-}
-
 .navbar li + li {
     margin-top: 0.75rem;
 }
@@ -84,46 +78,34 @@
     border-radius: 3px;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .navbar {
-        top: 20px;
-        left: 10px;
+/* Estilo específico para o ícone do QRCode */
+.qrcode-icon-container {
+    display: block; /* Garante que o container do ícone esteja visível */
+}
+
+/* Inicialmente esconde o ícone do QRCode */
+.qrcode-icon {
+    display: none; /* Esconde o ícone por padrão */
+}
+
+/* Exibe o ícone do QRCode apenas em telas menores que 768px */
+@media (max-width: 767px) {
+    .qrcode-icon-container {
+        display: block; /* Garante que o container do ícone esteja visível */
     }
 
-    .navbar ul {
-        width: 3rem; /* Reduz a largura em telas menores */
-    }
-
-    .navbar li:nth-child(6) {
-        margin-top: 3rem;
-        padding-top: 1rem;
-    }
-
-    .navbar a i {
-        font-size: 1.2rem; /* Reduz o tamanho dos ícones */
-    }
-
-    .navbar a span {
-        left: calc(100% + 1rem); /* Ajusta a posição da tooltip */
+    .qrcode-icon {
+        display: block; /* Exibe o ícone em dispositivos móveis */
     }
 }
 
-@media (max-width: 480px) {
-    .navbar ul {
-        width: 2.5rem; /* Mais estreita em telas muito pequenas */
+/* Em telas maiores que 767px, esconde o ícone do QRCode */
+@media (min-width: 768px) {
+    .qrcode-icon {
+        display: none; /* Esconde o ícone em telas maiores */
     }
 
-    .navbar a i {
-        font-size: 1rem; /* Reduz ainda mais o tamanho dos ícones */
-    }
-
-    .navbar li:nth-child(6) {
-        margin-top: 2rem;
-        padding-top: 0.75rem;
-    }
-
-    .navbar a span {
-        left: calc(100% + 0.75rem); /* Ajusta novamente a posição da tooltip */
+    .qrcode-icon-container {
+        display: none; /* Esconde o container do ícone em telas maiores */
     }
 }
