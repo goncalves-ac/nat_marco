@@ -4,7 +4,7 @@ import './../style/QRCodePage.css';
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 
-import QRCodePixIMG from './../img/qrcode-pix.png';
+import QRCodePixIMG from './../img/qr-code.png';
 
 const QRCodePage = () => {
   return (

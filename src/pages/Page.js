@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import './../style/Page.css';
 
+import NatMarco from './../img/NATMARCOS.png';
+
+
 function Page() {
     const navigate = useNavigate();
 
@@ -37,7 +40,7 @@ function Page() {
                     style={buttonStyle} 
                     onClick={handleClick}
                 >
-                    Natália & Marcos
+                        <img src={NatMarco} alt="" className="App-button-name" />
                 </button>
             </header>
         </div>

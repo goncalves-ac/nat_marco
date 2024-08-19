@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Parisienne&display=swap');
 
 .container, .container-fluid {
   margin: 0 auto;
@@ -45,10 +45,12 @@
   margin: auto;
   text-align: center;
   padding: 0 15px;
+  font-family: "Parisienne", cursive;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .couple-container > h1 {
-  font-family: "Edu AU VIC WA NT Hand", cursive;
   font-weight: 600;
   font-size: 2rem;
   margin: 2rem 0;
@@ -57,8 +59,6 @@
 }
 
 .couple-container > h3 {
-  font-family: "Edu AU VIC WA NT Hand", cursive;
-  font-weight: 600;
   font-size: 1rem;
   color: #36366480;
   margin: 2rem 0;
@@ -66,7 +66,8 @@
 }
 
 .couple-container > p {
-  color: #CD7AA3;
+  font-size: 1.5rem;
+  color: #e84315;
 }
 
 .couple-wrap {
@@ -96,9 +97,9 @@
 }
 
 .couple-half h3 {
-  font-family: "Edu AU VIC WA NT Hand", cursive;
+  font-family: "Parisienne", cursive;
   font-weight: 600;
-  color: #CD7AA3;
+  color: #e84315;
   font-size: 1.875rem; /* 30px */
   line-height: 1.5;
 }
@@ -133,26 +134,22 @@
 .parents-font {
   padding: 1rem 0;
   margin: 1rem 0;
-  font-family: "Estonia", Arial, serif;
+  font-family: "Parisienne", cursive;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .heart {
   position: absolute;
-  top: 4em;
+  top: 40em;
   left: 50%;
   transform: translateX(-50%);
   z-index: 99;
   animation: pulse 1s ease infinite;
 }
 
-.heart i {
-  font-size: 20px;
-  background: #f3f3f3;
-  padding: 20px;
-  color: #FF0000;
-  border-radius: 50%;
+.heart img {
+  width: 6rem;
 }
 
 @media screen and (max-width: 768px) {

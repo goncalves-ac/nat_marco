@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Parisienne&display=swap');
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -17,6 +19,9 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: "Parisienne", cursive;
+    font-style: normal;
+    line-height: 1.7rem;
 }
 
 /* HTML5 display-role reset for older browsers */

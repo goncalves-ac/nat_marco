@@ -12,14 +12,14 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #FFC88A, #CD7AA3);
+    background-image: url("./../img/[].png");
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 0.75rem;
     border-radius: 10px;
     box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
-    width: 4rem; /* Define a largura inicial da barra */
+    width: 3rem; /* Define a largura inicial da barra */
 }
 
 .navbar li + li {
@@ -39,7 +39,7 @@
 }
 
 .navbar a:hover, a:focus, a.active {
-    background-color: #CD7AA3;
+    background-color: #e84315;
     outline: 0;
 }
 
@@ -54,7 +54,7 @@
 
 .navbar a span {
     position: absolute;
-    background-color: #CD7AA3;
+    background-color: #e84315;
     white-space: nowrap;
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -71,7 +71,7 @@
     width: 12px;
     height: 12px;
     position: absolute;
-    background-color: #CD7AA3;
+    background-color: #e84315;
     left: -5px;
     top: 50%;
     transform: translatey(-50%) rotate(45deg);
@@ -108,4 +108,22 @@
     .qrcode-icon-container {
         display: none; /* Esconde o container do ícone em telas maiores */
     }
+}
+
+.MDireta {
+    height: 40vh;
+    width: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.MEsquerda {
+    height: 40vh;
+    width: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
 }

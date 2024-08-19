@@ -7,7 +7,7 @@ import Countdown from './../component/Countdown.js';
 import GiftPagination from './../component/GiftPagination.js';
 import QRCodePix from './../component/QRCodePix.js';
 
-import QRCodePixIMG from './../img/qrcode-pix.png';
+import QRCodePixIMG from './../img/qr-code.png';
 
 const importAll = (requireContext) => {
   return requireContext.keys().map(requireContext);
