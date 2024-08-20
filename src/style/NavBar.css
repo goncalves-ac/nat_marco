@@ -1,27 +1,35 @@
-/* src/components/Navbar.css */
+/* Estilos gerais */
 .navbar {
     display: flex;
     position: fixed;
-    top: 48px;
-    left: 20px;
+    top: 10px;
+    left: 10px;
     z-index: 99;
-    flex-direction: column; /* Alinha a barra de navegação verticalmente */
+    flex-direction: column;
+    align-items: flex-start;
 }
 
+/* Estilo do menu em telas pequenas */
 .navbar ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    background-image: url("./../img/[].png");
-    display: flex;
+    display: none;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
     padding: 0.75rem;
     border-radius: 10px;
     box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
-    width: 3rem; /* Define a largura inicial da barra */
+    background-image: url("./../img/[].png");
+    width: 3rem;
 }
 
+.navbar.open ul {
+    display: flex;
+}
+
+/* Estilo dos itens do menu */
 .navbar li + li {
     margin-top: 0.75rem;
 }
@@ -38,75 +46,132 @@
     position: relative;
 }
 
-.navbar a:hover, a:focus, a.active {
+.navbar a:hover, .navbar a:focus, .navbar a.active {
     background-color: #e84315;
     outline: 0;
-}
-
-.navbar a:hover span, a:focus span, a.active span {
-    transform: scale(1);
-    opacity: 1;
 }
 
 .navbar a i {
     font-size: 1.375rem;
 }
 
+/* Estilo do texto ao lado do ícone */
 .navbar a span {
     position: absolute;
-    background-color: #e84315;
-    white-space: nowrap;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    left: calc(100% + 1.5rem);
+    left: calc(100% + 1rem);
     transform-origin: center left;
-    transform: scale(0);
+    transform: scale(0.8);
     opacity: 0;
-    transition: 0.15s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    background-color: #e84315;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    z-index: 10;
 }
 
 .navbar a span:before {
     content: "";
     display: block;
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     position: absolute;
     background-color: #e84315;
-    left: -5px;
+    left: -4px;
     top: 50%;
-    transform: translatey(-50%) rotate(45deg);
-    border-radius: 3px;
+    transform: translateY(-50%) rotate(45deg);
 }
 
-/* Estilo específico para o ícone do QRCode */
-.qrcode-icon-container {
-    display: block; /* Garante que o container do ícone esteja visível */
+.navbar a:hover span, .navbar a:focus span {
+    opacity: 1;
+    transform: scale(1);
 }
 
-/* Inicialmente esconde o ícone do QRCode */
-.qrcode-icon {
-    display: none; /* Esconde o ícone por padrão */
+/* Botão do menu sanduíche */
+.menu-button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #000;
+    padding: 0.5rem;
+    border-radius: 8px;
 }
 
-/* Exibe o ícone do QRCode apenas em telas menores que 768px */
+.menu-button:focus {
+    outline: none;
+}
+
+/* Estilos para telas pequenas */
 @media (max-width: 767px) {
-    .qrcode-icon-container {
-        display: block; /* Garante que o container do ícone esteja visível */
+    .menu-button {
+        display: block;
     }
 
-    .qrcode-icon {
-        display: block; /* Exibe o ícone em dispositivos móveis */
+    .navbar ul {
+        width: auto;
+    }
+
+    .navbar a {
+        justify-content: flex-start;
+        padding-left: 0.5rem;
+    }
+
+    .navbar a span {
+        position: absolute;
+        left: calc(100% + 1rem);
+        transform-origin: center left;
+        transform: scale(0.8);
+        opacity: 0;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        background-color: #e84315;
+        color: #fff;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        white-space: nowrap;
+        font-size: 0.875rem;
+        z-index: 10;
+    }
+
+    .navbar a:hover span, .navbar a:focus span {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .navbar a span:before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        background-color: #e84315;
+        left: -4px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
     }
 }
 
-/* Em telas maiores que 767px, esconde o ícone do QRCode */
+/* Estilos para telas grandes */
 @media (min-width: 768px) {
-    .qrcode-icon {
-        display: none; /* Esconde o ícone em telas maiores */
+    .menu-button {
+        display: none;
     }
 
-    .qrcode-icon-container {
-        display: none; /* Esconde o container do ícone em telas maiores */
+    .navbar ul {
+        display: flex;
+        width: auto;
+    }
+
+    .navbar a span {
+        display: none; /* Oculta os textos ao lado dos ícones */
+    }
+
+    .navbar a:hover span, .navbar a:focus span {
+        display: block;
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
