@@ -20,7 +20,7 @@ const Navbar = () => {
       <img src={MDireita} alt="groom" className="MDireta" />
       <img src={MEsquerda} alt="groom" className="MEsquerda" />
       <nav className={`navbar ${isMenuOpen ? 'open' : ''}`}>
-        <button className="menu-toggle" onClick={toggleMenu}>
+      <button className={`menu-toggle ${isMenuOpen ? 'show' : ''}`} onClick={toggleMenu}>
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>

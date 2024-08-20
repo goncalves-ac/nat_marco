@@ -2,19 +2,19 @@
 .navbar {
   display: flex;
   position: fixed;
+  align-items: center;
   top: 1.5rem;
   left: 1rem;
   z-index: 99;
   flex-direction: column; /* Alinha a barra de navegação verticalmente */
-  background-image: url("./../img/[].png");
+  height: 80vh;
   
 }
 
 /* Estilo do menu em telas pequenas */
 .navbar ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0;  
   background-image: url("./../img/[].png");
   align-items: center;
   flex-direction: column;
@@ -23,37 +23,40 @@
   border-radius: 10px;
   box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
   width: 3rem; /* Define a largura inicial da barra */
+  height: 100%;
+  margin-top: 0.5rem;
 }
 
 .navbar.open ul {
-    display: flex;
+  display: flex;
 }
 
 /* Estilo dos itens do menu */
-.navbar li + li {
-  margin-top: 0.75rem;
-}
 
+.navbar li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-radius: 20%;
+  padding: 0.2rem;
+}
 .navbar a {
   color: #000;
   text-decoration: none;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 8px;
-  position: relative;
+  padding: 0.5rem;
 }
 
-.navbar a:hover,
+.navbar li:hover,
 a:focus,
 a.active {
   background-color: #e84315;
   outline: 0;
 }
 
-.navbar a:hover span,
+.navbar li:hover span,
 a:focus span,
 a.active span {
   transform: scale(1);
@@ -66,16 +69,16 @@ a.active span {
 
 /* Estilo do texto ao lado do ícone */
 .navbar a span {
-  position: absolute;
   background-color: #e84315;
   white-space: nowrap;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  left: calc(100% + 1.5rem);
+  left: calc(100% + 0.3rem);
   transform-origin: center left;
   transform: scale(0);
   opacity: 0;
   transition: 0.15s ease;
+  position: absolute;
 }
 
 .navbar a span:before {
@@ -83,7 +86,6 @@ a.active span {
   display: block;
   width: 12px;
   height: 12px;
-  position: absolute;
   background-color: #e84315;
   left: -5px;
   top: 50%;
@@ -119,25 +121,23 @@ a.active span {
   z-index: 10;
 }
 
-
-
-
-
 /* Navbar.css */
-
 
 .menu-toggle {
   display: none;
   cursor: pointer;
   background: none;
   border: none;
-  outline: none;
-  padding: 10px;
+  outline: none;  
   background-color: transparent !important;
   padding: 0.75rem;
   border-radius: 50%;
   box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
   width: 3rem; /* Define a largura inicial da barra */
+  height: 3rem;
+  min-height: 3rem;
+  background-image: url("./../img/[].png");
+  position: relative;
 }
 
 .menu-toggle .bar {
@@ -146,19 +146,31 @@ a.active span {
   height: 3px;
   background: #333;
   margin: 5px 0;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+}
+
+/* Transform bars into an X when menu is open */
+.menu-toggle.show .bar:nth-child(1) {
+  -webkit-transform: rotate(-45deg) translate(-8px, 7px) ;
+  transform: rotate(-45deg) translate(-8px, 7px) ;
+  margin-top: 0 !important; 
+}
+
+.menu-toggle.show .bar:nth-child(2) {
+  opacity: 0; /* Hide the middle bar */
+}
+
+.menu-toggle.show .bar:nth-child(3) {
+  -webkit-transform: rotate(45deg) translate(-4px, -4px) ;
+  transform: rotate(45deg) translate(-4px, -4px);
+  margin-bottom: 0 !important;
+  
 }
 
 .nav-list {
   display: flex;
   list-style: none;
 }
-
-.nav-list li {
-  margin: 0 15px;
-}
-
-
 
 /* Exibe o ícone do QRCode apenas em telas menores que 768px */
 @media (max-width: 767px) {
@@ -170,40 +182,44 @@ a.active span {
     display: block; /* Exibe o ícone em dispositivos móveis */
   }
 
-  .MDireta{
+  .MDireta {
     height: 25vh;
   }
-  .MEsquerda{
+  .MEsquerda {
     height: 25vh;
   }
 
-  /* Menu toggle*/.menu-toggle {
+  /* Menu toggle*/
+  .menu-toggle {
     display: block;
   }
 
   .nav-list {
-    display: none;
     flex-direction: column;
     width: 100%;
-    position: absolute;
     top: 60px;
     left: 0;
     background-color: white;
+    max-height: 0; /* Start hidden */
+    opacity: 0; /* Start invisible */
+    overflow: hidden; /* Hide overflowing content */
+    transition: max-height 0.8s ease-out, opacity 0.8s ease-out; /* Smooth transition */
   }
 
   .nav-list.show {
     display: flex;
+    max-height: 100%;
+    opacity: 1;
   }
 
   .nav-list li {
     margin: 10px 0;
   }
-  
-  .navbar{
+
+  .navbar {
     border-radius: 50%;
   }
 }
-
 
 /* Em telas maiores que 767px, esconde o ícone do QRCode */
 @media (min-width: 768px) {
@@ -215,7 +231,7 @@ a.active span {
     display: none; /* Esconde o container do ícone em telas maiores */
   }
 
-  .navbar ul{
+  .navbar ul {
     display: flex;
   }
 }
