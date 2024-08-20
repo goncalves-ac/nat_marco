@@ -1,5 +1,5 @@
 // src/components/Navbar.js
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './../style/NavBar.css'; // Importa o CSS
@@ -9,12 +9,23 @@ import MDireita from './../img/molduraDireita.png';
 import MEsquerda from './../img/molduraEsquerda.png';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <section>
       <img src={MDireita} alt="groom" className="MDireta" />
       <img src={MEsquerda} alt="groom" className="MEsquerda" />
-      <nav className="navbar">
-        <ul>
+      <nav className={`navbar ${isMenuOpen ? 'open' : ''}`}>
+        <button className="menu-toggle" onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </button>
+        <ul className={`nav-list ${isMenuOpen ? 'show' : ''}`}>
           <li>
             <Link to="/">
               <i className="fa-brands fa-fort-awesome fa-2x"></i>

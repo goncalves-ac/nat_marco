@@ -1,129 +1,214 @@
 /* src/components/Navbar.css */
 .navbar {
-    display: flex;
-    position: fixed;
-    top: 48px;
-    left: 20px;
-    z-index: 99;
-    flex-direction: column; /* Alinha a barra de navegação verticalmente */
+  display: flex;
+  position: fixed;
+  top: 1.5rem;
+  left: 1rem;
+  z-index: 99;
+  flex-direction: column; /* Alinha a barra de navegação verticalmente */
+  background-image: url("./../img/[].png");
+  
 }
 
 .navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    background-image: url("./../img/[].png");
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0.75rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
-    width: 3rem; /* Define a largura inicial da barra */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-image: url("./../img/[].png");
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
+  width: 3rem; /* Define a largura inicial da barra */
 }
 
 .navbar li + li {
-    margin-top: 0.75rem;
+  margin-top: 0.75rem;
 }
 
 .navbar a {
-    color: #000;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 8px;
-    position: relative;
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+  position: relative;
 }
 
-.navbar a:hover, a:focus, a.active {
-    background-color: #e84315;
-    outline: 0;
+.navbar a:hover,
+a:focus,
+a.active {
+  background-color: #e84315;
+  outline: 0;
 }
 
-.navbar a:hover span, a:focus span, a.active span {
-    transform: scale(1);
-    opacity: 1;
+.navbar a:hover span,
+a:focus span,
+a.active span {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .navbar a i {
-    font-size: 1.375rem;
+  font-size: 1.375rem;
 }
 
 .navbar a span {
-    position: absolute;
-    background-color: #e84315;
-    white-space: nowrap;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    left: calc(100% + 1.5rem);
-    transform-origin: center left;
-    transform: scale(0);
-    opacity: 0;
-    transition: 0.15s ease;
+  position: absolute;
+  background-color: #e84315;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  left: calc(100% + 1.5rem);
+  transform-origin: center left;
+  transform: scale(0);
+  opacity: 0;
+  transition: 0.15s ease;
 }
 
 .navbar a span:before {
-    content: "";
-    display: block;
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    background-color: #e84315;
-    left: -5px;
-    top: 50%;
-    transform: translatey(-50%) rotate(45deg);
-    border-radius: 3px;
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  background-color: #e84315;
+  left: -5px;
+  top: 50%;
+  transform: translatey(-50%) rotate(45deg);
+  border-radius: 3px;
 }
 
 /* Estilo específico para o ícone do QRCode */
 .qrcode-icon-container {
-    display: block; /* Garante que o container do ícone esteja visível */
+  display: block; /* Garante que o container do ícone esteja visível */
 }
 
 /* Inicialmente esconde o ícone do QRCode */
 .qrcode-icon {
-    display: none; /* Esconde o ícone por padrão */
-}
-
-/* Exibe o ícone do QRCode apenas em telas menores que 768px */
-@media (max-width: 767px) {
-    .qrcode-icon-container {
-        display: block; /* Garante que o container do ícone esteja visível */
-    }
-
-    .qrcode-icon {
-        display: block; /* Exibe o ícone em dispositivos móveis */
-    }
-}
-
-/* Em telas maiores que 767px, esconde o ícone do QRCode */
-@media (min-width: 768px) {
-    .qrcode-icon {
-        display: none; /* Esconde o ícone em telas maiores */
-    }
-
-    .qrcode-icon-container {
-        display: none; /* Esconde o container do ícone em telas maiores */
-    }
+  display: none; /* Esconde o ícone por padrão */
 }
 
 .MDireta {
-    height: 40vh;
-    width: auto;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 10;
+  height: 40vh;
+  width: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .MEsquerda {
-    height: 40vh;
-    width: auto;
-    position: fixed;
-    bottom: 0;
+  height: 40vh;
+  width: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+
+
+
+
+/* Navbar.css */
+
+
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 10px;
+  background-color: transparent !important;
+  padding: 0.75rem;
+  border-radius: 50%;
+  box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
+  width: 3rem; /* Define a largura inicial da barra */
+}
+
+.menu-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #333;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+}
+
+.nav-list li {
+  margin: 0 15px;
+}
+
+
+
+/* Exibe o ícone do QRCode apenas em telas menores que 768px */
+@media (max-width: 767px) {
+  .qrcode-icon-container {
+    display: block; /* Garante que o container do ícone esteja visível */
+  }
+
+  .qrcode-icon {
+    display: block; /* Exibe o ícone em dispositivos móveis */
+  }
+
+  .MDireta{
+    height: 25vh;
+  }
+  .MEsquerda{
+    height: 25vh;
+  }
+
+  /* Menu toggle*/.menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
     left: 0;
-    z-index: 10;
+    background-color: white;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .nav-list li {
+    margin: 10px 0;
+  }
+  
+  .navbar{
+    border-radius: 50%;
+  }
+}
+
+
+/* Em telas maiores que 767px, esconde o ícone do QRCode */
+@media (min-width: 768px) {
+  .qrcode-icon {
+    display: none; /* Esconde o ícone em telas maiores */
+  }
+
+  .qrcode-icon-container {
+    display: none; /* Esconde o container do ícone em telas maiores */
+  }
+
+  .navbar ul{
+    display: flex;
+  }
 }

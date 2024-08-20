@@ -40,7 +40,7 @@ function Page() {
                     style={buttonStyle} 
                     onClick={handleClick}
                 >
-                        <img src={NatMarco} alt="" className="App-button-name" />
+                    
                 </button>
             </header>
         </div>
