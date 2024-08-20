@@ -1,29 +1,47 @@
 .qrcode-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-  }
-  
-  .qrcode-page h1 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  .qrcode-container-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .qrcode-image-page {
-    width: 50vw; /* Ajuste o tamanho conforme necessário */
-    height: auto;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    background: #fff;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.qrcode-page h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.qrcode-container-page {
+  display: flex;
+  flex-direction: column; /* Alinha a imagem e o botão em uma coluna */
+  align-items: center;
+  justify-content: center;
+}
+
+.qrcode-image-page {
+  width: 30vw; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px; /* Adiciona espaço entre a imagem e o botão */
+}
+
+.copy-pix-button {
+  padding: 10px 20px;
+  font-size: 2rem;
+  font-family: "Parisienne", cursive;
+  color: white;
+  background-color: #e84315;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+}
+
+.copy-pix-button:hover {
+  background-color: #d2360f; /* Altere o fundo para um tom mais escuro de laranja */
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
