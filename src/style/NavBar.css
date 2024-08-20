@@ -1,6 +1,5 @@
 /* Estilos gerais */
 .navbar {
-<<<<<<< HEAD
   display: flex;
   position: fixed;
   top: 1.5rem;
@@ -9,20 +8,10 @@
   flex-direction: column; /* Alinha a barra de navegação verticalmente */
   background-image: url("./../img/[].png");
   
-=======
-    display: flex;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 99;
-    flex-direction: column;
-    align-items: flex-start;
->>>>>>> 8ceef54d9d643a29e7e77791ca84e1b7b8721d9c
 }
 
 /* Estilo do menu em telas pequenas */
 .navbar ul {
-<<<<<<< HEAD
   list-style: none;
   margin: 0;
   padding: 0;
@@ -34,20 +23,6 @@
   border-radius: 10px;
   box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
   width: 3rem; /* Define a largura inicial da barra */
-=======
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 0.75rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
-    background-image: url("./../img/[].png");
-    width: 3rem;
->>>>>>> 8ceef54d9d643a29e7e77791ca84e1b7b8721d9c
 }
 
 .navbar.open ul {
@@ -71,7 +46,6 @@
   position: relative;
 }
 
-<<<<<<< HEAD
 .navbar a:hover,
 a:focus,
 a.active {
@@ -86,20 +60,12 @@ a.active span {
   opacity: 1;
 }
 
-=======
-.navbar a:hover, .navbar a:focus, .navbar a.active {
-    background-color: #e84315;
-    outline: 0;
-}
-
->>>>>>> 8ceef54d9d643a29e7e77791ca84e1b7b8721d9c
 .navbar a i {
   font-size: 1.375rem;
 }
 
 /* Estilo do texto ao lado do ícone */
 .navbar a span {
-<<<<<<< HEAD
   position: absolute;
   background-color: #e84315;
   white-space: nowrap;
@@ -133,124 +99,6 @@ a.active span {
 /* Inicialmente esconde o ícone do QRCode */
 .qrcode-icon {
   display: none; /* Esconde o ícone por padrão */
-=======
-    position: absolute;
-    left: calc(100% + 1rem);
-    transform-origin: center left;
-    transform: scale(0.8);
-    opacity: 0;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    background-color: #e84315;
-    color: #fff;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    white-space: nowrap;
-    font-size: 1.3rem;
-    z-index: 10;
-}
-
-.navbar a span:before {
-    content: "";
-    display: block;
-    width: 8px;
-    height: 8px;
-    position: absolute;
-    background-color: #e84315;
-    left: -4px;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-}
-
-.navbar a:hover span, .navbar a:focus span {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Botão do menu sanduíche */
-.menu-button {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #000;
-    padding: 0.5rem;
-    border-radius: 8px;
-}
-
-.menu-button:focus {
-    outline: none;
-}
-
-/* Estilos para telas pequenas */
-@media (max-width: 767px) {
-    .menu-button {
-        display: block;
-    }
-
-    .navbar ul {
-        width: auto;
-    }
-
-    .navbar a {
-        justify-content: flex-start;
-        padding-left: 0.5rem;
-    }
-
-    .navbar a span {
-        position: absolute;
-        left: calc(100% + 1rem);
-        transform-origin: center left;
-        transform: scale(0.8);
-        opacity: 0;
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        background-color: #e84315;
-        color: #fff;
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        white-space: nowrap;
-        font-size: 0.875rem;
-        z-index: 10;
-    }
-
-    .navbar a:hover span, .navbar a:focus span {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .navbar a span:before {
-        content: "";
-        display: block;
-        width: 8px;
-        height: 8px;
-        position: absolute;
-        background-color: #e84315;
-        left: -4px;
-        top: 50%;
-        transform: translateY(-50%) rotate(45deg);
-    }
-}
-
-/* Estilos para telas grandes */
-@media (min-width: 768px) {
-    .menu-button {
-        display: none;
-    }
-
-    .navbar ul {
-        display: flex;
-        width: auto;
-    }
-
-    .navbar a span {
-        display: none; /* Oculta os textos ao lado dos ícones */
-    }
-
-    .navbar a:hover span, .navbar a:focus span {
-        display: block;
-        opacity: 1;
-        transform: scale(1);
-    }
->>>>>>> 8ceef54d9d643a29e7e77791ca84e1b7b8721d9c
 }
 
 .MDireta {

@@ -9,24 +9,16 @@ import MDireita from './../img/molduraDireita.png';
 import MEsquerda from './../img/molduraEsquerda.png';
 
 const Navbar = () => {
-<<<<<<< HEAD
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-=======
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
->>>>>>> 8ceef54d9d643a29e7e77791ca84e1b7b8721d9c
   };
 
   return (
     <section>
       <img src={MDireita} alt="groom" className="MDireta" />
       <img src={MEsquerda} alt="groom" className="MEsquerda" />
-<<<<<<< HEAD
       <nav className={`navbar ${isMenuOpen ? 'open' : ''}`}>
         <button className="menu-toggle" onClick={toggleMenu}>
           <span className="bar"></span>
@@ -34,13 +26,6 @@ const Navbar = () => {
           <span className="bar"></span>
         </button>
         <ul className={`nav-list ${isMenuOpen ? 'show' : ''}`}>
-=======
-      <nav className={`navbar ${menuOpen ? 'open' : ''}`}>
-        <button className="menu-button" onClick={toggleMenu}>
-          <i className="fa fa-bars"></i>
-        </button>
-        <ul>
->>>>>>> 8ceef54d9d643a29e7e77791ca84e1b7b8721d9c
           <li>
             <Link to="/" onClick={toggleMenu}>
               <i className="fa-brands fa-fort-awesome fa-2x"></i>
