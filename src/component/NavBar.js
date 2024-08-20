@@ -39,7 +39,7 @@ const Navbar = () => {
           <li>
             <Link to="/VenusMars" onClick={toggleMenu}>
               <i className="fa-solid fa-venus-mars fa-2x"></i>
-              <span>???</span>
+              <span>Apresentação</span>
             </Link>
           </li>
           <li>
