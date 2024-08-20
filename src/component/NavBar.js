@@ -57,7 +57,7 @@ const Navbar = () => {
           <li className="qrcode-icon-container">
             <Link to="/qrcodepix" className="qrcode-icon" onClick={toggleMenu}>
               <i className="fa-solid fa-qrcode fa-2x"></i>
-              <span>QRCode Pix</span>
+              <span>Pix</span>
             </Link>
           </li>
           <li>
