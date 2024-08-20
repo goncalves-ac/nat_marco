@@ -27,10 +27,16 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: npm run build --prod  # Certifique-se de que o script build está configurado corretamente no package.json
 
-      - name: Deploy
-        run: npm run deploy
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./dist/  # Certifique-se de que esta seja a pasta correta para o build
 
     env:
       FTP_HOST: ${{ secrets.FTP_HOST }}

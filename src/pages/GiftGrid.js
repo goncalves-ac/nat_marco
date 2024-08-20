@@ -28,7 +28,6 @@ const gifts = images.map((image) => {
   return { src: image, title, price, description: "Uma descrição personalizada." };
 });
 
-
 const GiftGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -42,11 +41,22 @@ const GiftGrid = () => {
     setCurrentPage(page);
   };
 
+  const copyPixToClipboard = () => {
+    const pixCode = '00020126360014br.gov.bcb.pix0114+55319880817965204000053039865802BR5924NATALIA PEREIRA DE SOUZA6014Belo Horizonte610930640-16062290525PJUO428988251724027278793630461BB';
+    navigator.clipboard.writeText(pixCode)
+      .then(() => {
+        alert('Código PIX copiado para a área de transferência!');
+      })
+      .catch((err) => {
+        console.error('Erro ao copiar o código PIX: ', err);
+      });
+  };
+
   return (
     <section>
       <NavBar />
       <QRCodePix
-        qrCodeUrl= { QRCodePixIMG } // URL do QRCode
+        qrCodeUrl={QRCodePixIMG} // URL do QRCode
         mobileView={isMobile}
       />
       <Countdown targetDate="2025-01-05T00:00:00" />

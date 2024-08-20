@@ -1,34 +1,53 @@
 .qrcode-container {
-    position: relative;
-}
-  
-.qrcode-image {
     position: fixed;
-    top: 3vh;
-    right: 3vw;
+    top: 3vh; /* Espaço do topo */
+    right: 3vw; /* Espaço da direita */
+    display: flex;
+    flex-direction: column; /* Coloca a imagem e o botão em uma coluna */
+    align-items: center; /* Centraliza horizontalmente */
+    z-index: 1000;
+  }
+  
+  /* Estilos para a imagem do QR Code */
+  .qrcode-image {
     width: auto; /* Ajuste o tamanho conforme necessário */
     height: 20vh;
-    z-index: 1000;
-}
-
-/* Exibe a imagem e esconde o ícone quando a tela é maior que 768px */
-@media (min-width: 768px) {
-    .qrcode-image {
-        display: block; /* Exibe a imagem */
+    margin-bottom: 1rem; /* Espaço entre a imagem e o botão */
+  }
+  
+  /* Estilos para o botão de copiar PIX */
+  .copy-pix-button {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-family: "Parisienne", cursive;
+    color: white;
+    background-color: #e84315;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    text-align: center;
+  }
+  
+  /* Estilos para o botão de copiar PIX ao passar o mouse */
+  .copy-pix-button:hover {
+    background-color: #d2360f; /* Altere o fundo para um tom mais escuro de laranja */
+    color: #000;
+    font-size: 1.75rem; /* Ajusta o tamanho da fonte ao passar o mouse */
+    font-weight: 600;
+  }
+  
+  /* Exibe a imagem e o botão quando a tela é maior que 768px */
+  @media (min-width: 768px) {
+    .qrcode-container {
+      display: flex; /* Exibe a imagem e o botão como uma coluna */
     }
-
-    .qrcode-icon {
-        display: none; /* Esconde o ícone */
+  }
+  
+  /* Exibe a imagem e o botão quando a tela é menor que 768px */
+  @media (max-width: 767px) {
+    .qrcode-container {
+      display: flex; /* Exibe a imagem e o botão como uma coluna */
     }
-}
-
-/* Exibe o ícone e esconde a imagem quando a tela é menor que 768px */
-@media (max-width: 767px) {
-    .qrcode-image {
-        display: none; /* Esconde a imagem */
-    }
-
-    .qrcode-icon {
-        display: block; /* Exibe o ícone */
-    }
-}
+  }
+  
