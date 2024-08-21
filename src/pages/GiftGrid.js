@@ -24,8 +24,8 @@ const parseImageName = (filename) => {
 
 const gifts = images.map((image) => {
   const filename = image.split('/').pop();
-  const { title, price } = parseImageName(filename);
-  return { src: image, title, price, description: "Uma descrição personalizada." };
+  const { title, price, description } = parseImageName(filename);
+  return { src: image, title, price, description };
 });
 
 const GiftGrid = () => {
