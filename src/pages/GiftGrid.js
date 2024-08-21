@@ -16,10 +16,11 @@ const importAll = (requireContext) => {
 const images = importAll(require.context('./../img/gifts', false, /\.(jpg|jpeg|png|gif)$/));
 
 const parseImageName = (filename) => {
-  const [title, priceWithExt] = filename.split('-');
+  const [title, priceWithExt, descriptionWithExt] = filename.split('-');
   const price = `R$ ${priceWithExt.split('.')[0]}`;
   const formattedTitle = title.replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
-  return { title: formattedTitle, price };
+  const description = descriptionWithExt ? descriptionWithExt.split('.')[0].replace(/_/g, ' ') : '';
+  return { title: formattedTitle, price, description };
 };
 
 const gifts = images.map((image) => {
@@ -35,7 +36,7 @@ const GiftGrid = () => {
   const endIndex = startIndex + itemsPerPage;
   const currentGifts = gifts.slice(startIndex, endIndex);
 
-  const isMobile = window.innerWidth <= 768; // Ou qualquer lógica para verificar o tamanho da tela
+  const isMobile = window.innerWidth <= 768;
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -56,7 +57,7 @@ const GiftGrid = () => {
     <section>
       <NavBar />
       <QRCodePix
-        qrCodeUrl={QRCodePixIMG} // URL do QRCode
+        qrCodeUrl={QRCodePixIMG}
         mobileView={isMobile}
       />
       <Countdown targetDate="2025-01-05T00:00:00" />
