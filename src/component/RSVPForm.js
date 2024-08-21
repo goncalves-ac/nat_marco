@@ -29,14 +29,14 @@ const RSVPForm = ({ setRSVPs }) => {
             required
           />
         </div>
-        <div>
+        <div className='space-form'>
           <input
             type="checkbox"
             id="conf"
             checked={conf}
             onChange={(e) => setConf(e.target.checked)}
           />
-          <label htmlFor="conf"> Confirmo minha presença. </label>
+          <label htmlFor="conf" className='conf'> Confirmo minha presença. </label>
         </div>
         <div className="form-group">
           <label htmlFor="message">Mensagem aos noivos (opcional):</label>

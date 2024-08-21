@@ -70,8 +70,8 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/contato" onClick={toggleMenu}>
-              <i className="icon-mail-2"></i>
-              <span>Contato</span>
+              <i className="fa-sharp fa-solid fa-circle-check fa-2x"></i>
+              <span>Confirmar presença</span>
             </Link>
           </li>
         </ul>
