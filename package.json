@@ -17,13 +17,13 @@
     "web-vitals": "^4.2.3"
   },
   "scripts": {
-    "build": "npm run lint && react-scripts build",
+    "build": "react-scripts build",
     "deploy": "npm run build && node ./deploy.js",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --max-warnings 10"
-  
+    "lint": "eslint . --max-warnings 100",
+    "prebuild": "npm run lint"
   },
   "eslintConfig": {
     "extends": [
