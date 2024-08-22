@@ -29,6 +29,9 @@ jobs:
       - name: Build
         run: npm run build  # Comando de build padrão para React
 
+      - name: List build directory
+        run: ls -la ./build/  # Verifique se a pasta build contém os arquivos esperados
+
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -37,7 +40,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./build/  # Diretório correto de build para React
-          remote-dir: /home2/nata3951/public_html  # Ajuste para o caminho remoto correto
+          remote-dir: /public_html  # Ajuste para o caminho remoto correto
 
     env:
       FTP_HOST: ${{ secrets.FTP_HOST }}
