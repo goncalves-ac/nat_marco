@@ -17,11 +17,13 @@
     "web-vitals": "^4.2.3"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "npm run lint && react-scripts build",
     "deploy": "npm run build && node ./deploy.js",
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --max-warnings 10"
+  
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "ftp-deploy": "^2.4.7",
     "npm": "^10.8.2"
   }
