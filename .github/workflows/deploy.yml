@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./build/
-          remote-dir: /home2/nata3951/public_html
+          server-dir: /home2/nata3951/public_html
 
     env:
       FTP_HOST: ${{ secrets.FTP_HOST }}
