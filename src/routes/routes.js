@@ -24,7 +24,6 @@ function routes () {
         <Route path="/Confirmations" element={<RSVPFormPage />} />
         <Route path="/ConfirmationsList" element={<RSVPListPage />} />
         <Route path="/QRCodePix" element={<QRCodePixPage />} />
-
       </Routes>
     </BrowserRouter>
   )
