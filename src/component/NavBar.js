@@ -69,7 +69,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/contato" onClick={toggleMenu}>
+            <Link to="/Confirmations" onClick={toggleMenu}>
               <i className="fa-sharp fa-solid fa-circle-check fa-2x"></i>
               <span>Confirmar presença</span>
             </Link>
