@@ -7,7 +7,7 @@ function RSVPFormPage() {
   const [rsvps, setRSVPs] = useState([]);
 
   const addRSVP = async (newRSVP) => {
-    const response = await fetch('http://localhost:3000/api/rsvps', {
+    const response = await fetch(`${process.env.DB_HOST}/api/rsvps`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
