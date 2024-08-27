@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PostIt from "./../component/PostIt.js";
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
-import "./../style/PagMsg.css";
 import "./../style/PostItBoard.css";
 
 const PostItBoard = () => {
@@ -37,43 +36,42 @@ const PostItBoard = () => {
         // Adicione mais mensagens aqui
     ];
 
-    const itemsPerPage = 16; // Grade 4x4
+    const itemsPerPage = 10;
     const [currentPage, setCurrentPage] = useState(1);
     const [readMessages, setReadMessages] = useState([]);
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({ name: '', message: '' });
 
-    const generatePositions = () => {
-        const positions = [];
-        const rows = 4;
-        const cols = 4;
-        const cellHeight = 20; // 20vh
-        const cellWidth = 20; // 20vw
-
-        for (let row = 0; row < rows; row++) {
-            for (let col = 0; col < cols; col++) {
-                positions.push({
-                    top: `${row * cellHeight}vh`,
-                    left: `${col * cellWidth}vw`,
-                });
-            }
-        }
-        return positions;
-    };
-
-    const positions = generatePositions();
     const totalPages = Math.ceil(messages.length / itemsPerPage);
     const currentMessages = messages.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
 
+    const generateRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
     const handleMarkAsRead = (index) => {
-        if (!readMessages.includes(index)) {
-            setReadMessages([...readMessages, index]);
-        }
+        setReadMessages([...readMessages, index]);
+    };
+
+    const openModal = (msg) => {
+        setModalContent(msg);
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
     };
 
     return (
@@ -81,33 +79,53 @@ const PostItBoard = () => {
             <NavBar />
             <Countdown targetDate="2025-01-05T00:00:00" />
             <div className="post-it-board-container">
-                <div className="post-it-board">
+                <div className={`post-it-board ${window.innerWidth <= 1000 ? 'list-view' : ''}`}>
                     {currentMessages.map((msg, index) => {
-                        const position = positions[index % itemsPerPage]; // Posição fixa com base no índice
-                        const isRead = readMessages.includes((currentPage - 1) * itemsPerPage + index);
+                        const isRead = readMessages.includes(index);
+                        const backgroundColor = generateRandomColor();
                         return (
-                            <PostIt
-                                key={(currentPage - 1) * itemsPerPage + index}
-                                name={msg.name}
-                                message={msg.message}
-                                style={{ top: position.top, left: position.left }}
-                                isRead={isRead}
-                                onMarkAsRead={() => handleMarkAsRead((currentPage - 1) * itemsPerPage + index)}
-                            />
+                            <div 
+                                key={index}
+                                className="post-it"
+                                style={{ '--random-color': backgroundColor }}
+                                onClick={() => {
+                                    openModal(msg);
+                                    handleMarkAsRead(index);
+                                }}
+                            >
+                                <div className="post-it-name">
+                                    {msg.name}
+                                </div>
+                                {window.innerWidth > 1000 && (
+                                    <div className="post-it-message">
+                                        {msg.message}
+                                    </div>
+                                )}
+                                {isRead && <span className="checkmark">&#10003;</span>}
+                            </div>
                         );
                     })}
                 </div>
-            </div>
-            <div className="pagination">
-                {Array.from({ length: totalPages }, (_, i) => (
-                    <button
-                        key={i}
-                        onClick={() => handlePageChange(i + 1)}
-                        className={i + 1 === currentPage ? "active" : ""}
-                    >
-                        {i + 1}
-                    </button>
-                ))}
+                <div className="pagination">
+                    {Array.from({ length: totalPages }, (_, i) => (
+                        <button
+                            key={i}
+                            onClick={() => handlePageChange(i + 1)}
+                            className={i + 1 === currentPage ? "active" : ""}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                </div>
+                {isModalOpen && (
+                    <div className="modal" onClick={closeModal}>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <span className="close" onClick={closeModal}>&times;</span>
+                            <h2>{modalContent.name}</h2>
+                            <p>{modalContent.message}</p>
+                        </div>
+                    </div>
+                )}
             </div>
         </section>
     );

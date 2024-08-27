@@ -1,23 +1,129 @@
+/* PostItBoard.css */
+
 .post-it-board-container {
     position: relative;
     width: 75vw;
     height: 80vh;
     overflow: hidden;
     z-index: 999;
-    background-color: transparent; /* Certifique-se de que o fundo seja transparente ou defina uma cor se necessário */
+    background-color: transparent;
 }
 
 .post-it-board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 10000;
-    pointer-events: none; /* Isso permitirá que o clique passe para os elementos dentro dos post-its */
+    pointer-events: none;
 }
 
 .post-it-board .post-it {
-    pointer-events: all; /* Permite a interação com os post-its */
+    width: 20vw;
+    height: 20vh;
+    margin: 5px;
+    pointer-events: all;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--random-color);
 }
 
+.post-it-board .post-it-name {
+    font-size: 16px;
+}
+
+.post-it-board .post-it-message {
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    z-index: 10001;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.pagination .active {
+    font-weight: bold;
+    background-color: #333;
+    color: white;
+}
+
+/* Estilo do modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Estilos para telas menores que 1000px */
+@media (max-width: 1000px) {
+    .post-it-board {
+        display: block;
+        height: auto;
+    }
+
+    .post-it-board .post-it {
+        width: auto;
+        height: auto;
+        margin: 10px 0;
+        font-size: 14px;
+        text-align: center;
+        position: relative;
+        background-color: var(--random-color); /* Manter a cor aleatória */
+    }
+
+    .post-it-board .post-it-name {
+        display: block;
+    }
+
+    .post-it-board .post-it-message {
+        display: none;
+    }
+
+    .post-it-board .checkmark {
+        font-size: 18px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}
