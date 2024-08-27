@@ -74,6 +74,12 @@ const Navbar = () => {
               <span>Confirmar presença</span>
             </Link>
           </li>
+          <li>
+            <Link to="/Mensagens" onClick={toggleMenu}>
+              <i className="fa-solid fa-envelope fa-2x"></i>
+              <span>Mensagens</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </section>

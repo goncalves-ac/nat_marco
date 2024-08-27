@@ -10,6 +10,7 @@ import Date from '../pages/Date.js';
 import QRCodePixPage from '../pages/QRCodePixPage.js';
 import RSVPFormPage from '../pages/RSVPFormPage.js';
 import RSVPListPage from '../pages/RSVPListPage.js';
+import PostIt from '../pages/PostItBoard.js';
 
 
 function routes () {
@@ -23,6 +24,7 @@ function routes () {
         <Route path="/Date" element={<Date />} />
         <Route path="/Confirmations" element={<RSVPFormPage />} />
         <Route path="/ConfirmationsList" element={<RSVPListPage />} />
+        <Route path="/Mensagens" element={<PostIt />} />
         <Route path="/QRCodePix" element={<QRCodePixPage />} />
       </Routes>
     </BrowserRouter>

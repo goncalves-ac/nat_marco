@@ -1,0 +1,23 @@
+.post-it-board-container {
+    position: relative;
+    width: 75vw;
+    height: 80vh;
+    overflow: hidden;
+    z-index: 999;
+    background-color: transparent; /* Certifique-se de que o fundo seja transparente ou defina uma cor se necessário */
+}
+
+.post-it-board {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    pointer-events: none; /* Isso permitirá que o clique passe para os elementos dentro dos post-its */
+}
+
+.post-it-board .post-it {
+    pointer-events: all; /* Permite a interação com os post-its */
+}
+
