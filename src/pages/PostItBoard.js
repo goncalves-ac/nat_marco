@@ -33,7 +33,6 @@ const PostItBoard = () => {
         { name: "Ana7", message: "Desejo a vocês uma vida cheia!" },
         { name: "Ana8", message: "Desejo a vocês uma vida cheia!" },
         { name: "Ana9", message: "Desejo a vocês uma vida cheia!" },
-        // Adicione mais mensagens aqui
     ];
 
     const itemsPerPage = 10;
