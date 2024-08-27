@@ -21,10 +21,6 @@ const PostIt = ({ name, message, style, isRead, onMarkAsRead }) => {
         <>
             <div
                 className={`post-it ${isRead ? 'read' : ''}`}
-                style={{
-                    transform: `rotate(${Math.random() * 10 - 5}deg)`,
-                    ...style,
-                }}
                 onClick={handleClick}
             >
                 <div className="post-it-content">

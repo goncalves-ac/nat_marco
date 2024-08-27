@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import PostIt from "./../component/PostIt.js";
+import React, { useState, useEffect } from "react";
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import "./../style/PostItBoard.css";
@@ -49,6 +48,11 @@ const PostItBoard = () => {
         return postItColors[Math.floor(Math.random() * postItColors.length)];
     };
 
+    // Função para gerar uma rotação aleatória
+    const getRandomRotation = () => {
+        return `${Math.random() * 10 - 5}deg`;
+    };
+
     const totalPages = Math.ceil(messages.length / itemsPerPage);
     const currentMessages = messages.slice(
         (currentPage - 1) * itemsPerPage,
@@ -72,20 +76,24 @@ const PostItBoard = () => {
         setModalOpen(false);
     };
 
+    // Atualiza a classe 'list-view' com base na largura da tela
+    const isMobile = window.innerWidth <= 1000;
+
     return (
         <section>
             <NavBar />
             <Countdown targetDate="2025-01-05T00:00:00" />
             <div className="post-it-board-container">
-                <div className={`post-it-board ${window.innerWidth <= 1000 ? 'list-view' : ''}`}>
+                <div className={`post-it-board ${isMobile ? 'list-view' : ''}`}>
                     {currentMessages.map((msg, index) => {
                         const isRead = readMessages.includes(index);
                         const backgroundColor = getRandomColor();
+                        const rotation = getRandomRotation();
                         return (
                             <div 
                                 key={index}
-                                className="post-it"
-                                style={{ backgroundColor }}
+                                className={`post-it ${isMobile ? 'mini-post-it' : ''}`}
+                                style={{ backgroundColor, transform: `rotate(${rotation})` }}
                                 onClick={() => {
                                     openModal(msg);
                                     handleMarkAsRead(index);
@@ -94,7 +102,7 @@ const PostItBoard = () => {
                                 <div className="post-it-name">
                                     {msg.name}
                                 </div>
-                                {window.innerWidth > 1000 && (
+                                {!isMobile && (
                                     <div className="post-it-message">
                                         {msg.message}
                                     </div>
