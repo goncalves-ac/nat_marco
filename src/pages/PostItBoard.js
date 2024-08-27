@@ -34,7 +34,7 @@ const PostItBoard = () => {
         { name: "Ana9", message: "Desejo a vocês uma vida cheia!" },
     ];
 
-    const itemsPerPage = 10;
+    const itemsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
     const [readMessages, setReadMessages] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
