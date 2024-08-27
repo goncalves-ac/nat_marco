@@ -41,20 +41,19 @@ const PostItBoard = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({ name: '', message: '' });
 
+    // Lista de cores dos post-its
+    const postItColors = ["#FFD700", "#FFB6C1", "#98FB98", "#87CEEB", "#FF69B4", "#FFDAB9", "#E6E6FA", "#F0E68C", "#FF6347", "#DDA0DD"];
+
+    // Função para gerar uma cor aleatória a partir da lista
+    const getRandomColor = () => {
+        return postItColors[Math.floor(Math.random() * postItColors.length)];
+    };
+
     const totalPages = Math.ceil(messages.length / itemsPerPage);
     const currentMessages = messages.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
-
-    const generateRandomColor = () => {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    };
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -81,12 +80,12 @@ const PostItBoard = () => {
                 <div className={`post-it-board ${window.innerWidth <= 1000 ? 'list-view' : ''}`}>
                     {currentMessages.map((msg, index) => {
                         const isRead = readMessages.includes(index);
-                        const backgroundColor = generateRandomColor();
+                        const backgroundColor = getRandomColor();
                         return (
                             <div 
                                 key={index}
                                 className="post-it"
-                                style={{ '--random-color': backgroundColor }}
+                                style={{ backgroundColor }}
                                 onClick={() => {
                                     openModal(msg);
                                     handleMarkAsRead(index);

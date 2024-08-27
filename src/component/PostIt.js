@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import './../style/PostIt.css';
 
 const PostIt = ({ name, message, style, isRead, onMarkAsRead }) => {
-    const postItColors =  ["#FFD700", "#FFB6C1", "#98FB98", "#87CEEB", "#FF69B4", "#FFDAB9", "#E6E6FA", "#F0E68C", "#FF6347", "#DDA0DD"];//Golden, Linght Pink, Pale Green, Sky Blue, Hot Pink, Peach Puff, Lavender, khaki, Tomato, Plum
     const [isModalOpen, setModalOpen] = useState(false);
-    const randomColor = postItColors[Math.floor(Math.random() * postItColors.length)];
 
     const handleClick = () => {
         setModalOpen(true);
@@ -24,7 +22,6 @@ const PostIt = ({ name, message, style, isRead, onMarkAsRead }) => {
             <div
                 className={`post-it ${isRead ? 'read' : ''}`}
                 style={{
-                    backgroundColor: randomColor,
                     transform: `rotate(${Math.random() * 10 - 5}deg)`,
                     ...style,
                 }}
