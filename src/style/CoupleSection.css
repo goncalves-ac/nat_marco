@@ -111,7 +111,7 @@
   }
 
   .couple-half {
-    width: 60vw; /* Ajustar para ocupar a largura completa */
+    width: 70%; /* Ajustar para ocupar a largura completa */
     margin-bottom: 1.5rem;
   }
 
@@ -127,6 +127,10 @@
   .couple-half .groom img, .couple-half .bride img {
     width: 120px;
     height: 120px;
+  }
+
+  .couple-container {
+    margin-top: 70vh;
   }
 
   .couple-container > h1 {
@@ -150,5 +154,9 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Prevenir rolagem horizontal */
+  }
+
+  .desc-bride {
+    margin-bottom: 10vh;
   }
 }
