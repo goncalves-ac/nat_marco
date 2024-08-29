@@ -11,24 +11,6 @@
     padding: 1rem;
 }
 
-@media (max-width: 768px) {
-    .countdown-container {
-        right: 15px;
-        bottom: 15px;
-        padding: 0.5rem;
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .countdown-container {
-        right: 10px;
-        bottom: 10px;
-        gap: 0.5rem;
-        font-size: 1rem;
-    }
-}
-
 .countdown-item {
     background: #f4f4f4;
     border: 1px solid #ddd;
@@ -92,6 +74,13 @@
     .countdown-label {
         font-size: 1.5rem;
     }
+
+    .countdown-container {
+        right: 15px;
+        bottom: 15px;
+        padding: 0.5rem;
+        font-size: 1.2rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -107,4 +96,35 @@
     .countdown-label {
         font-size: 1.3rem;
     }
+
+    .countdown-container {
+        right: 10px;
+        bottom: 10px;
+        gap: 0.5rem;
+        font-size: 1rem;
+    }
 }
+
+@media (max-width: 344px) {
+    .countdown-item {
+        width: 50px;
+        padding: 0.5rem;
+    }
+
+    .countdown-value {
+        font-size: 1.2rem;
+    }
+
+    .countdown-label {
+        font-size: 1.2rem;
+    }
+
+    .countdown-container {
+        right: 10px;
+        bottom: 10px;
+        gap: 0.5rem;
+        font-size: 1rem;
+    }
+
+}
+
