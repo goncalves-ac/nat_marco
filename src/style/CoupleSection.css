@@ -16,30 +16,6 @@
   clear: both;
 }
 
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-
 .couple-container {
   max-width: 90%;
   margin: auto;
@@ -75,25 +51,11 @@
   margin: 80px auto;
 }
 
-@media screen and (max-width: 768px) {
-  .couple-wrap {
-    width: 100%;
-    margin: 40px auto;
-  }
-}
-
 .couple-half {
   width: 50%;
   float: left;
   padding: 0 15px;
   box-sizing: border-box;
-}
-
-@media screen and (max-width: 768px) {
-  .couple-half {
-    width: 100%;
-    padding: 0;
-  }
 }
 
 .couple-half h3 {
@@ -117,13 +79,6 @@
   border-radius: 50%;
   width: 150px;
   height: 150px;
-}
-
-@media screen and (max-width: 480px) {
-  .couple-half .groom, .couple-half .bride {
-    width: 120px;
-    height: 120px;
-  }
 }
 
 .desc-groom, .desc-bride {
@@ -152,18 +107,54 @@
   width: 6rem;
 }
 
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .couple-wrap {
+    width: 100%;
+    margin: 40px auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .couple-half {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .couple-half .groom, .couple-half .bride {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
   .heart {
     display: none;
   }
-}
-
-.img-responsive {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.text-center {
-  text-align: center;
 }

@@ -1,6 +1,6 @@
 .countdown-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
     text-align: center;
@@ -35,7 +35,7 @@
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 80px;
+    width: 90px;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -76,35 +76,35 @@
 .countdown-label {
     display: block;
     font-size: 1.5rem;
-    color: #777;
+    color: #292929;
 }
 
 @media (max-width: 768px) {
     .countdown-item {
-        width: 70px;
+        width: 80px;
         padding: 0.75rem;
     }
 
     .countdown-value {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     .countdown-label {
-        font-size: 0.65rem;
+        font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .countdown-item {
-        width: 60px;
+        width: 70px;
         padding: 0.5rem;
     }
 
     .countdown-value {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .countdown-label {
-        font-size: 0.6rem;
+        font-size: 1.3rem;
     }
 }
