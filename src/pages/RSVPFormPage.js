@@ -7,24 +7,36 @@ function RSVPFormPage() {
   const [rsvps, setRSVPs] = useState([]);
 
   const addRSVP = async (newRSVP) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: newRSVP.name,
-        conf: newRSVP.conf,
-        message: newRSVP.message,
-        readed: false,
-      }),
-    });
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: newRSVP.name,
+          conf: newRSVP.conf,
+          message: newRSVP.message,
+          readed: false, // Definido como false por padrão
+        }),
+      });
 
-    const data = await response.json();
-    if (data.status === 'success') {
-      setRSVPs((prevRSVPs) => [...prevRSVPs, newRSVP]);
-    } else {
-      console.error('Erro ao salvar RSVP:', data.message);
+      // Verifique se a resposta é JSON
+      const contentType = response.headers.get('Content-Type');
+      if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        if (data.status === 'success') {
+          setRSVPs((prevRSVPs) => [...prevRSVPs, newRSVP]);
+        } else {
+          console.error('Erro ao salvar RSVP:', data.message);
+        }
+      } else {
+        // Se a resposta não for JSON, mostre o texto da resposta
+        const text = await response.text();
+        console.error('Resposta inesperada:', text);
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
     }
   };
 
