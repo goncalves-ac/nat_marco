@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-/** ROTAS */
+// Importar as páginas
 import Page from '../pages/Page.js';
 import SlideshowPage from '../pages/SlideshowPage.js';
 import GiftGrid from '../pages/GiftGrid.js';
@@ -12,12 +12,11 @@ import RSVPFormPage from '../pages/RSVPFormPage.js';
 import RSVPListPage from '../pages/RSVPListPage.js';
 import PostIt from '../pages/PostItBoard.js';
 
-
-function routes () {
+function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path='/' element={<Page />} />
+        <Route path="/" element={<Page />} />
         <Route path="/SlideshowPage" element={<SlideshowPage />} />
         <Route path="/gifts" element={<GiftGrid />} />
         <Route path="/VenusMars" element={<VenusMars />} />
@@ -28,7 +27,7 @@ function routes () {
         <Route path="/QRCodePix" element={<QRCodePixPage />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default routes;
+export default AppRoutes;

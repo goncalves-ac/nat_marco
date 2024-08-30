@@ -1,11 +1,10 @@
 import React from 'react';
-import Routes from '../routes/routes.js'
+import AppRoutes from '../routes/routes.js'; // Ajuste o caminho conforme necessário
 import './../style/App.css';
-
 
 function App() {
   return (
-    <Routes />
+    <AppRoutes /> // Usa o componente de rotas aqui
   );
 }
 
