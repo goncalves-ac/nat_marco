@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 // Importar as páginas
 import Page from '../pages/Page.js';
@@ -14,19 +14,17 @@ import PostIt from '../pages/PostItBoard.js';
 
 function AppRoutes() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Page />} />
-        <Route path="/SlideshowPage" element={<SlideshowPage />} />
-        <Route path="/gifts" element={<GiftGrid />} />
-        <Route path="/VenusMars" element={<VenusMars />} />
-        <Route path="/Date" element={<Date />} />
-        <Route path="/Confirmations" element={<RSVPFormPage />} />
-        <Route path="/ConfirmationsList" element={<RSVPListPage />} />
-        <Route path="/Mensagens" element={<PostIt />} />
-        <Route path="/QRCodePix" element={<QRCodePixPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Page />} />
+      <Route path="/SlideshowPage" element={<SlideshowPage />} />
+      <Route path="/gifts" element={<GiftGrid />} />
+      <Route path="/VenusMars" element={<VenusMars />} />
+      <Route path="/Date" element={<Date />} />
+      <Route path="/Confirmations" element={<RSVPFormPage />} />
+      <Route path="/ConfirmationsList" element={<RSVPListPage />} />
+      <Route path="/Mensagens" element={<PostIt />} />
+      <Route path="/QRCodePix" element={<QRCodePixPage />} />
+    </Routes>
   );
 }
 
