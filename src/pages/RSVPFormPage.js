@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import RSVPForm from './../component/RSVPForm.js';
 
 function RSVPFormPage() {
+  useEffect(() => {
+    console.log('RSVPFormPage component is rendering');
+  }, []);
+
   const [rsvps, setRSVPs] = useState([]);
 
   const addRSVP = async (newRSVP) => {
