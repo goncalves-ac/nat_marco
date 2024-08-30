@@ -2,8 +2,8 @@
 
 .post-it-board-container {
     position: relative;
-    width: 75vw;
-    height: 80vh;
+    width: 70vw;
+    height: 70vh;
     overflow: hidden;
     z-index: 999;
     background-color: transparent;
@@ -30,7 +30,9 @@
     pointer-events: all;
     box-sizing: border-box;
     position: relative;
+    gap: 1.5rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -49,6 +51,7 @@
 }
 
 .post-it-board .post-it-message {
+    width: 15vw;
     font-size: 1.5rem;
 }
 
@@ -86,44 +89,91 @@
 }
 
 .modal-content {
-    background: white;
+    background-image: url("./../img/background.png");
     padding: 20px;
     border-radius: 10px;
     width: 80%;
-    max-width: 500px;
+    max-width: 60vw;
+    height: 70%;
+    max-height: 40vw;
     position: relative;
+}
+
+.modal-content span {
+    font-size: 5rem;
 }
 
 .close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
+    top: 25px;
+    right: 15px;
+    font-size: 30px;
     cursor: pointer;
 }
 
+.modal h2 {
+    font-size: 6rem;
+    padding: 8% 5%;
+}
+
+.modal p {
+    font-size: 2.5rem;
+    padding-left: 5%;
+    padding-right: 3%;
+    line-height: 1em;
+}
+
 /* Estilos para telas menores que 1000px */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
+    .post-it-name {
+        font-size: 2rem;
+    }
+    
     .post-it-board {
-        display: block;
-        height: auto;
+        font-size: 2rem;
+    }
+    
+    .post-it-board .post-it-message {
+        width: 15vw;
+        font-size: 1rem;
+    }
+}
+
+/* Estilos para telas menores que 1000px */
+@media (max-width: 1050px) {
+    .post-it {
+        height: 20vh;
+    }
+    
+    .post-it-name {
+        font-size: 1.5rem;
+    }
+    
+    .post-it-board {
+        font-size: 2rem;
+    }
+
+    .post-it-board .post-it-message {
+        width: 15vw;
+        font-size: 1rem;
+    }
+
+    .post-it-message {
+        display: none;
     }
 
     .post-it-board .post-it {
-        width: auto;
-        height: auto;
-        margin: 10px 0;
-        font-size: 14px;
-        text-align: center;
-    }
-
-    .post-it-board.list-view {
+        width: 20vw;
+        height: 10vh;
+        margin: 5px;
+        gap: 1.5rem;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
     }
 
-    .post-it-board .post-it-name {
-        font-size: 18px;
+    .post-it-board {
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: space-around;
     }
 }

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import "./../style/PostItBoard.css";
 
 const PostItBoard = () => {
     const messages = [
-        { name: "Alice1", message: "Parabéns pelo casamento!" },
+        { name: "Alice1", message: "Parabéns pelo casamento! Parabéns pelo casamento! Parabéns pelo casamento! Parabéns pelo casamento!" },
         { name: "Alice2", message: "Parabéns pelo casamento!" },
         { name: "Alice3", message: "Parabéns pelo casamento!" },
         { name: "Alice4", message: "Parabéns pelo casamento!" },
@@ -34,14 +34,14 @@ const PostItBoard = () => {
         { name: "Ana9", message: "Desejo a vocês uma vida cheia!" },
     ];
 
-    const itemsPerPage = 9;
+    const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPage, setCurrentPage] = useState(1);
     const [readMessages, setReadMessages] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({ name: '', message: '' });
 
     // Lista de cores dos post-its
-    const postItColors = ["#FFD700", "#FFB6C1", "#98FB98", "#87CEEB", "#FF69B4", "#FFDAB9", "#E6E6FA", "#F0E68C", "#FF6347", "#DDA0DD"];
+    const postItColors = ["#e8431570", "#FFD70070"];
 
     // Função para gerar uma cor aleatória a partir da lista
     const getRandomColor = () => {
@@ -52,6 +52,23 @@ const PostItBoard = () => {
     const getRandomRotation = () => {
         return `${Math.random() * 10 - 5}deg`;
     };
+
+    // Ajustar itemsPerPage com base na largura da tela
+    useEffect(() => {
+        const updateItemsPerPage = () => {
+            if (window.innerWidth < 1051) {
+                setItemsPerPage(18); // Exibe todas as mensagens em uma página
+            } else {
+                setItemsPerPage(9); // Valor padrão para telas maiores
+            }
+        };
+
+        updateItemsPerPage(); // Chama a função uma vez na montagem
+        window.addEventListener("resize", updateItemsPerPage); // Atualiza ao redimensionar a tela
+
+        // Cleanup
+        return () => window.removeEventListener("resize", updateItemsPerPage);
+    }, [messages.length]);
 
     const totalPages = Math.ceil(messages.length / itemsPerPage);
     const currentMessages = messages.slice(
@@ -76,23 +93,22 @@ const PostItBoard = () => {
         setModalOpen(false);
     };
 
-    // Atualiza a classe 'list-view' com base na largura da tela
-    const isMobile = window.innerWidth <= 1000;
-
     return (
         <section>
             <NavBar />
             <Countdown targetDate="2025-01-05T00:00:00" />
             <div className="post-it-board-container">
-                <div className={`post-it-board ${isMobile ? 'list-view' : ''}`}>
+                <div className="post-it-board">
                     {currentMessages.map((msg, index) => {
                         const isRead = readMessages.includes(index);
                         const backgroundColor = getRandomColor();
                         const rotation = getRandomRotation();
+                        const truncatedMessage = msg.message.length > 50 ? msg.message.slice(0, 50) + "..." : msg.message;
+
                         return (
                             <div 
                                 key={index}
-                                className={`post-it ${isMobile ? 'mini-post-it' : ''}`}
+                                className="post-it"
                                 style={{ backgroundColor, transform: `rotate(${rotation})` }}
                                 onClick={() => {
                                     openModal(msg);
@@ -102,27 +118,27 @@ const PostItBoard = () => {
                                 <div className="post-it-name">
                                     {msg.name}
                                 </div>
-                                {!isMobile && (
-                                    <div className="post-it-message">
-                                        {msg.message}
-                                    </div>
-                                )}
+                                <div className="post-it-message">
+                                    {truncatedMessage}
+                                </div>
                                 {isRead && <span className="checkmark">&#10003;</span>}
                             </div>
                         );
                     })}
                 </div>
-                <div className="pagination">
-                    {Array.from({ length: totalPages }, (_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => handlePageChange(i + 1)}
-                            className={i + 1 === currentPage ? "active" : ""}
-                        >
-                            {i + 1}
-                        </button>
-                    ))}
-                </div>
+                {totalPages > 1 && (
+                    <div className="pagination">
+                        {Array.from({ length: totalPages }, (_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => handlePageChange(i + 1)}
+                                className={i + 1 === currentPage ? "active" : ""}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+                    </div>
+                )}
                 {isModalOpen && (
                     <div className="modal" onClick={closeModal}>
                         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
