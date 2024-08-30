@@ -3,6 +3,7 @@ import AppRoutes from '../routes/routes.js'; // Ajuste o caminho conforme necess
 import './../style/App.css';
 
 function App() {
+  console.log('App component is rendering');
   return (
     <AppRoutes /> // Usa o componente de rotas aqui
   );
