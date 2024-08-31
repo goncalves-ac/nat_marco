@@ -26,6 +26,11 @@ db.connect((err) => {
   console.log('Conectado ao banco de dados MySQL');
 });
 
+// Nova rota para fornecer a URL da API ao frontend
+app.get('/api/config', (req, res) => {
+  res.json({ apiUrl: process.env.REACT_APP_API_URL });
+});
+
 // Rota para obter todos os RSVPs
 app.get('/api/rsvps', (req, res) => {
   db.query('SELECT * FROM rsvps', (err, results) => {

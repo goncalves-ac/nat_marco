@@ -4,16 +4,23 @@ import Countdown from './../component/Countdown.js';
 import RSVPForm from './../component/RSVPForm.js';
 
 function RSVPFormPage() {
-  useEffect(() => {
-    console.log('RSVPFormPage component is rendering');
+  const [rsvps, setRSVPs] = useState([]);
+  const [apiUrl, setApiUrl] = useState('');
+
+  useEffect(() => {   
+
+    // Buscar a URL da API dinamicamente
+    fetch('/api/config')
+      .then((response) => response.json())
+      .then((data) => {
+        setApiUrl(data.apiUrl);
+      })
+      .catch((error) => console.error('Erro ao buscar a configuração da API:', error));
   }, []);
 
-  const [rsvps, setRSVPs] = useState([]);
-
   const addRSVP = async (newRSVP) => {
-    console.log(process.env.REACT_APP_API_URL)
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
+      const response = await fetch(`${apiUrl}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
