@@ -11,6 +11,7 @@ function RSVPFormPage() {
   const [rsvps, setRSVPs] = useState([]);
 
   const addRSVP = async (newRSVP) => {
+    console.log(process.env.REACT_APP_API_URL)
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
         method: 'POST',
