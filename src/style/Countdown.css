@@ -103,6 +103,8 @@
         padding: 0.5rem;
         font-size: 1.2rem;
         flex-direction: row;
+        z-index: 100000;
+
     }
 }
 
@@ -125,7 +127,6 @@
         bottom: 10px;
         gap: 0.5rem;
         font-size: 1rem;
-        z-index: 100000;
     }
 }
 
