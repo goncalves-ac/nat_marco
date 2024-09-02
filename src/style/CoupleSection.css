@@ -103,7 +103,7 @@
 @media (max-width: 1000px) {
 
   .heart {
-    top: 30em;
+    top: 35em;
   }
 
   .container {
@@ -116,6 +116,14 @@
 
   .desc-bride {
     margin-bottom: 10vh;
+  }
+
+  .couple-wrap {
+    flex-direction: row;
+  }
+
+  .couple-half {
+    margin-bottom: 1.5rem;
   }
 
 }
@@ -134,11 +142,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-  }
-
-  .couple-half {
-    width: 70%; /* Ajustar para ocupar a largura completa */
-    margin-bottom: 1.5rem;
   }
 
   .heart {
