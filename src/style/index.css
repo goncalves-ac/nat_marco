@@ -55,6 +55,7 @@ html {
 body {
   line-height: 1;
   background-image: url("./../img/background.png");
+  z-index: -100;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

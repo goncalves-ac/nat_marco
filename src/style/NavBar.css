@@ -115,7 +115,7 @@ a.active span {
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 00;
+  z-index: -10;
 }
 
 .MEsquerda {
@@ -124,7 +124,7 @@ a.active span {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 00;
+  z-index: -10;
 }
 
 /* Navbar.css */
