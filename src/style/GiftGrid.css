@@ -39,8 +39,7 @@
   margin-bottom: 8px;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 770px) {
   .gift-card {
     width: calc(50% - 16px); /* Ajusta o card para ocupar 50% da largura do container em telas menores */
   }

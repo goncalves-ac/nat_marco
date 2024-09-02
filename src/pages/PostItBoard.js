@@ -57,7 +57,7 @@ const PostItBoard = () => {
     useEffect(() => {
         const updateItemsPerPage = () => {
             if (window.innerWidth < 1051) {
-                setItemsPerPage(18); // Exibe todas as mensagens em uma página
+                setItemsPerPage(messages.length); // Exibe todas as mensagens em uma página
             } else {
                 setItemsPerPage(9); // Valor padrão para telas maiores
             }

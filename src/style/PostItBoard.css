@@ -190,3 +190,63 @@
         margin: -20px;
     }
 }
+
+@media (max-width: 550px) {
+    .post-it-board .post-it {
+        height: 10vh;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .post-it-board-container {
+        height: 200vh;
+        margin-top: 50vh;
+    }
+
+    .post-it-board {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        overflow-y: auto; /* Para permitir a rolagem vertical, se necessário */
+    }
+
+    .post-it-board .post-it {
+        width: 50vw; /* Aumenta a largura para ocupar mais espaço horizontal */
+        height: auto; /* Permite que a altura seja ajustada automaticamente */
+        margin: 10px 0; /* Ajusta a margem para espaçamento vertical */
+    }
+
+    .modal-content {
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 60vw;
+        height: 70%;
+        max-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centraliza verticalmente o conteúdo dentro do modal-content */
+        align-items: center;
+        position: relative;
+    }
+    
+    .modal-content span {
+        font-size: 3rem;
+    }
+    
+    .modal h2 {
+        font-size: 3rem;
+        padding: 8% 5%;
+        color: #e84315;
+    }
+    
+    .modal p {
+        font-size: 2.0rem;
+        padding-top: 10%;
+        padding-left: 5%;
+        padding-right: 3%;
+        line-height: 1em;
+    }
+}

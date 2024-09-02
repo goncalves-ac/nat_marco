@@ -125,10 +125,12 @@
         bottom: 10px;
         gap: 0.5rem;
         font-size: 1rem;
+        z-index: 100000;
     }
 }
 
 @media (max-width: 344px) {
+    
     .countdown-item {
         width: 50px;
         padding: 0.5rem;
