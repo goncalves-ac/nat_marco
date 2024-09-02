@@ -114,6 +114,7 @@
 .modal h2 {
     font-size: 6rem;
     padding: 8% 5%;
+    color: #e84315;
 }
 
 .modal p {
@@ -236,7 +237,6 @@
     .modal h2 {
         font-size: 3rem;
         padding: 8% 5%;
-        color: #e84315;
     }
     
     .modal p {
