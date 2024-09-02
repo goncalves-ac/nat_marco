@@ -123,7 +123,6 @@
     line-height: 1em;
 }
 
-/* Estilos para telas menores que 1000px */
 @media (max-width: 1200px) {
     .post-it-name {
         font-size: 2rem;
@@ -139,7 +138,6 @@
     }
 }
 
-/* Estilos para telas menores que 1000px */
 @media (max-width: 1050px) {
     .post-it {
         height: 20vh;
@@ -175,5 +173,20 @@
         flex-direction: column;
         justify-content: space-around;
         align-content: space-around;
+    }
+}
+
+
+@media (max-width: 770px) {
+    .pagination {
+        display: flex;
+        flex-direction: column; /* Coloca os botões em uma coluna */
+        justify-content: center; /* Centraliza verticalmente */
+        align-items: flex-end; /* Centraliza horizontalmente dentro da coluna */
+        right: 0; /* Alinha à direita */
+        top: 50%; /* Centraliza verticalmente */
+        transform: translateY(-50%); /* Ajusta para centralização exata */
+        z-index: 10001;
+        margin: -20px;
     }
 }
