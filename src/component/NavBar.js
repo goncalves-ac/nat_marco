@@ -77,7 +77,7 @@ const Navbar = () => {
           <li>
             <Link to="/Login" onClick={toggleMenu}>
               <i class="fa-solid fa-right-to-bracket fa-2x"></i>
-              <span>Login</span>
+              <span>Entrar / Inscrever-se</span>
             </Link>
           </li>
         </ul>
