@@ -11,6 +11,7 @@ import QRCodePixPage from '../pages/QRCodePixPage.js';
 import RSVPFormPage from '../pages/RSVPFormPage.js';
 import RSVPListPage from '../pages/RSVPListPage.js';
 import PostIt from '../pages/PostItBoard.js';
+import LoginPage from '../pages/SignPage.js';
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
       <Route path="/ConfirmationsList" element={<RSVPListPage />} />
       <Route path="/Mensagens" element={<PostIt />} />
       <Route path="/QRCodePix" element={<QRCodePixPage />} />
+      <Route path="/Login" element={<LoginPage />} />
     </Routes>
   );
 }
