@@ -14,7 +14,7 @@ export default function App() {
     }
   };
   const containerClass =
-    "container " + (type === "signUp" ? "right-panel-active" : "");
+    "sing-container " + (type === "signUp" ? "right-panel-active" : "");
   return (
     <section>
       <NavBar />
