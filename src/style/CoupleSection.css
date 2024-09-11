@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Parisienne&display=swap');
 
-.container, .container-fluid {
+.coupleSectionContainer, .container-fluid {
   margin: 0 auto;
   padding: 0 15px;
   max-width: 100vw;

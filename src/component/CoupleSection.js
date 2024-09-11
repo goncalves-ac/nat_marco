@@ -9,7 +9,7 @@ import s2_01 from './../img/s2_01.png';
 
 const CoupleSection = () => {
     return (
-        <section className='container'>
+        <section className='coupleSectionContainer'>
             
             <div className="couple-container">
                 <h1>“Aonde quer que tu fores, irei eu, e onde quer que pousares á noite, ali pousarei eu. O teu povo será o meu povo, o teu Deus o meu Deus….”</h1>
