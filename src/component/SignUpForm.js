@@ -18,7 +18,7 @@ function SignUpForm() {
 
     const { name, email, password } = state;
     alert(
-      `You are sign up with name: ${name} email: ${email} and password: ${password}`
+      `Você está se inscrevendo com o nome: ${name}, e-mail: ${email} e senha: ${password}`
     );
 
     for (const key in state) {
@@ -31,10 +31,11 @@ function SignUpForm() {
 
   return (
     <div className="form-container sign-up-container">
-      <form onSubmit={handleOnSubmit}>
-        <h1>Crie sua conta</h1>
-        <span>ou use seu e-mail cadastrado</span>
+      <form className="sing-form" onSubmit={handleOnSubmit}>
+        <h1 className="sing-h1">Crie sua conta</h1>
+        <span className="sing-span">ou use seu e-mail cadastrado</span>
         <input
+          className="sing-input"
           type="text"
           name="Nome"
           value={state.name}
@@ -42,6 +43,7 @@ function SignUpForm() {
           placeholder="Name"
         />
         <input
+          className="sing-input"
           type="email"
           name="email"
           value={state.email}
@@ -49,13 +51,14 @@ function SignUpForm() {
           placeholder="E-mail"
         />
         <input
+          className="sing-input"
           type="password"
           name="password"
           value={state.password}
           onChange={handleChange}
           placeholder="Senha"
         />
-        <button>Inscrever-se</button>
+        <button className="sing-button">Inscrever-se</button>
       </form>
     </div>
   );

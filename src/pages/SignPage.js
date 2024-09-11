@@ -19,19 +19,18 @@ export default function App() {
     <section>
       <NavBar />
       <Countdown targetDate="2025-01-05T00:00:00" />
-      <div className="App">
       <div className={containerClass} id="container">
         <SignUpForm />
         <SignInForm />
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1>Bem vindo de volta!</h1>
-              <p>
+              <h1 className="sing-h1">Bem vindo de volta!</h1>
+              <p className="sing-p">
                 Para se manter conectado conosco, faça login com suas informações pessoais
               </p>
               <button
-                className="ghost"
+                className="sing-button ghost"
                 id="signIn"
                 onClick={() => handleOnClick("signIn")}
               >
@@ -42,7 +41,7 @@ export default function App() {
               <h1>Olá!</h1>
               <p>Insira seus dados pessoais e comece sua jornada conosco</p>
               <button
-                className="ghost "
+                className="sing-button ghost"
                 id="signUp"
                 onClick={() => handleOnClick("signUp")}
               >
@@ -52,7 +51,6 @@ export default function App() {
           </div>
         </div>
       </div>
-    </div>
     </section>
     
   );

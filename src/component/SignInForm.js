@@ -16,7 +16,7 @@ function SignInForm() {
     evt.preventDefault();
 
     const { email, password } = state;
-    alert(`You are login with email: ${email} and password: ${password}`);
+    alert(`Você está logado com e-mail: ${email} e senha: ${password}`);
 
     for (const key in state) {
       setState({
@@ -28,10 +28,11 @@ function SignInForm() {
 
   return (
     <div className="form-container sign-in-container">
-      <form onSubmit={handleOnSubmit}>
-        <h1>Entrar</h1>
-        <span>ou crie sua conta</span>
+      <form className="sing-form" onSubmit={handleOnSubmit}>
+        <h1 className="sing-h1">Entrar</h1>
+        <span className="sing-span">ou crie sua conta</span>
         <input
+          className="sing-input"
           type="email"
           placeholder="Email"
           name="email"
@@ -39,14 +40,15 @@ function SignInForm() {
           onChange={handleChange}
         />
         <input
+          className="sing-input"
           type="password"
           name="password"
           placeholder="Senha"
           value={state.password}
           onChange={handleChange}
         />
-        <a href="#">Esqueceu sua senha?</a>
-        <button>Entrar</button>
+        <a className="" href="#">Esqueceu sua senha?</a>
+        <button className="sing-button">Entrar</button>
       </form>
     </div>
   );
