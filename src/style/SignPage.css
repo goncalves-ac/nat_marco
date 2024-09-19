@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 350px;
   height: 100vh;
 }
 
@@ -32,7 +33,7 @@
   padding: 15px;
   background: rgba(160, 179, 176, 0.25);
   color: #a0b3b0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
   cursor: pointer;
   transition: 0.5s ease;
@@ -45,7 +46,7 @@
 
 .LinkForgot {
   color: #e84315;
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
 }
 
@@ -107,7 +108,7 @@ h1 {
   border: 0;
   padding: 15px;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   background: #e84315;
   color: white;
   cursor: pointer;
@@ -117,7 +118,7 @@ h1 {
 
 .button-block {
   font-family: "Parisienne", cursive;
-  font-size: 2rem;
+  font-size: 1.5rem;
   width: 100%;
 }
 
