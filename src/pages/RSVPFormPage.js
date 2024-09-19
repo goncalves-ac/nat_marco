@@ -8,8 +8,12 @@ function RSVPFormPage() {
   const [apiUrl, setApiUrl] = useState('');
 
   useEffect(() => {
+    const dbHostEnv = process.env.REACT_APP_API_URL;
+    
+    // Logando no console para verificar se está acessando corretamente
+    console.log('DB_HOST:', dbHostEnv);
     // Buscar a URL da API através de uma rota do backend
-    fetch('/api/config')
+    fetch(dbHostEnv)
       .then((response) => response.json())
       .then((data) => {
         setApiUrl(data.apiUrl);  // Define a URL da API recebida do backend
