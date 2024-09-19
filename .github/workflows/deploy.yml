@@ -40,7 +40,7 @@ jobs:
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./build/
           server-dir: /public_html/
-
+          
     env:
       FTP_HOST: ${{ secrets.FTP_HOST }}
       FTP_USERNAME: ${{ secrets.FTP_USERNAME }}

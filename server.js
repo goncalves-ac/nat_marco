@@ -1,10 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path');
-
-// Configura o dotenv para carregar as variáveis de ambiente do arquivo .env
-require('dotenv').config({ path: path.resolve('/home2/nata3951/.env') });
+const mysql = require('mysql');
+const path = require('path'); // Para especificar caminhos, se necessário
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,15 +10,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Verificação das variáveis de ambiente
-console.log('DB_HOST:', process.env.DB_HOST);
-console.log('DB_USER:', process.env.DB_USER);
-console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
-console.log('DB_NAME:', process.env.DB_NAME);
-console.log('REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
-
-// Conexão com o banco de dados usando as variáveis de ambiente do .env
-const mysql = require('mysql');
+// Configuração da conexão com o banco de dados
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -54,6 +44,9 @@ app.post('/api/rsvps', (req, res) => {
     res.status(201).json({ id: results.insertId, ...newRSVP });
   });
 });
+
+// Serve arquivos estáticos se for necessário (opcional)
+// app.use(express.static(path.join(__dirname, 'build')));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
