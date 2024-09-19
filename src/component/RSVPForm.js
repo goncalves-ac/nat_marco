@@ -19,34 +19,40 @@ const RSVPForm = ({ setRSVPs }) => {
     <div className="rsvp-form-container">
       <form onSubmit={handleSubmit} className="rsvp-form">
         <h2>Confirme sua presença</h2>
-        <div className="form-group">
-          <label htmlFor="name">Nome:</label>
+
+        <div className="form-group floating-label">
           <input
             type="text"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            placeholder=" " // Adicione o placeholder com espaço em branco para o efeito funcionar corretamente
           />
+          <label htmlFor="name">Nome:</label>
         </div>
-        <div className='space-form'>
+
+        <div className="space-form">
           <input
             type="checkbox"
             id="conf"
             checked={conf}
             onChange={(e) => setConf(e.target.checked)}
           />
-          <label htmlFor="conf" className='conf'> Confirmo minha presença. </label>
+          <label htmlFor="conf" className="conf">Confirmo minha presença</label>
         </div>
-        <div className="form-group">
-          <label htmlFor="message">Mensagem aos noivos (opcional):</label>
+
+        <div className="form-group floating-label">
           <textarea
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            placeholder=" " // Adicione o placeholder com espaço em branco para o efeito funcionar corretamente
           ></textarea>
+          <label htmlFor="message">Mensagem aos noivos (opcional):</label>
         </div>
-        <button type="submit">Confirmar Presença</button>
+
+        <button type="submit" className='button button-block'>Confirmar Presença</button>
       </form>
     </div>
   );

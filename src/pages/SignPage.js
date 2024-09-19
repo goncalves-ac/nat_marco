@@ -1,57 +1,157 @@
 import React, { useState } from "react";
-import "./../style/SignPage.css";
-import SignInForm from "./../component/SignInForm.js";
-import SignUpForm from "./../component/SignUpForm.js";
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
+import "./../style/SignPage.css";
 
-export default function App() {
-  const [type, setType] = useState("signIn");
-  const handleOnClick = text => {
-    if (text !== type) {
-      setType(text);
-      return;
-    }
+function SignPage () {
+  const [activeTab, setActiveTab] = useState("signup");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
-  const containerClass =
-    "sing-container " + (type === "signUp" ? "right-panel-active" : "");
+
+  const handleTabClick = (tab, e) => {
+    e.preventDefault(); // Impede o comportamento padrão do link
+    setActiveTab(tab);
+  };
+
   return (
     <section>
       <NavBar />
       <Countdown targetDate="2025-01-05T00:00:00" />
-      <div className={containerClass} id="container">
-        <SignUpForm />
-        <SignInForm />
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-left">
-              <h1 className="sing-h1">Bem vindo de volta!</h1>
-              <p className="sing-p">
-                Para se manter conectado conosco, faça login com suas informações pessoais
-              </p>
-              <button
-                className="sing-button ghost"
-                id="signIn"
-                onClick={() => handleOnClick("signIn")}
-              >
-                Entrar
-              </button>
-            </div>
-            <div className="overlay-panel overlay-right">
-              <h1>Olá!</h1>
-              <p>Insira seus dados pessoais e comece sua jornada conosco</p>
-              <button
-                className="sing-button ghost"
-                id="signUp"
-                onClick={() => handleOnClick("signUp")}
-              >
-                Inscrever-se
-              </button>
-            </div>
+      <div className="form-container">
+        <div className="form">
+          <ul className="tab-group">
+            <li
+              className={`tab ${activeTab === "signup" ? "active" : ""}`}
+              onClick={(e) => handleTabClick("signup", e)}
+            >
+              <a href="#signup">Inscrever-se</a>
+            </li>
+            <li
+              className={`tab ${activeTab === "login" ? "active" : ""}`}
+              onClick={(e) => handleTabClick("login", e)}
+            >
+              <a href="#login">Conecte-se</a>
+            </li>
+          </ul>
+
+          <div className="tab-content">
+            {activeTab === "signup" && (
+              <div id="signup">
+                <h1>Inscreva-se gratuitamente</h1>
+                <form>
+                  <div className="top-row">
+                    <div className="field-wrap">
+                      <label className={formData.firstName ? "active" : ""}>
+                        Nome<span className="req">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="firstName"
+                        required
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+
+                    <div className="field-wrap">
+                      <label className={formData.lastName ? "active" : ""}>
+                        Sobrenome<span className="req">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="lastName"
+                        required
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="field-wrap">
+                    <label className={formData.email ? "active" : ""}>
+                      E-mail<span className="req">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="field-wrap">
+                    <label className={formData.password ? "active" : ""}>
+                      Senha<span className="req">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      required
+                      value={formData.password}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <button type="submit" className="button button-block">
+                    Inicie
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {activeTab === "login" && (
+              <div id="login">
+                <h1>Bem vindo de volta!</h1>
+                <form>
+                  <div className="field-wrap">
+                    <label className={formData.email ? "active" : ""}>
+                      E-mail<span className="req">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="field-wrap">
+                    <label className={formData.password ? "active" : ""}>
+                      Senha<span className="req">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      required
+                      value={formData.password}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <p className="forgot">
+                    <a href="#" className="LinkForgot">Esqueceu sua senha?</a>
+                  </p>
+
+                  <button className="button button-block">Entre</button>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </section>
-    
   );
-}
+};
+
+export default SignPage;

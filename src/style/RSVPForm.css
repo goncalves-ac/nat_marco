@@ -1,118 +1,106 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
-
+/* Container do formulário com fundo */
 .rsvp-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 500px;
+  margin: 0 auto;
+  background-color: rgba(19, 35, 47, 0.9); /* Cor de fundo */
   padding: 20px;
-  width: 100%;
-  height: 100%;
-  background-color: #f9f9f9;
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ao redor do formulário */
 }
 
-.conf {
-  font-size: 1.8rem;
-  font-weight: 600;
-}
-
-.space-form {
-  line-height: 5rem;
-}
-
+/* Estilos gerais do formulário */
 .rsvp-form {
-  background-color: #fff;
-  border: 2px solid #e84315;
-  border-radius: 10px;
-  padding: 20px;
-  width: 100%;
-  max-width: 500px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
 }
 
 .rsvp-form h2 {
+  font-size: 2rem;
+  margin: 1rem;
   color: #e84315;
-  font-family: "Parisienne", cursive;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 20px;
+}
+
+.conf {
+  font-size: 1.5rem;
+  color: #fff;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.form-group label {
-  display: block;
-  font-family: "Parisienne", cursive;
-  font-weight: 600;
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.form-group input[type="text"],
-.form-group textarea {
+/* Floating Labels */
+.floating-label input,
+.floating-label textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  font-size: 1.5rem;
+  background: none;
+  border: 1px solid #a0b3b0;
+  color: #333;
   border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: "Parisienne", cursive;
+  outline: none;
   box-sizing: border-box;
+  transition: border-color 0.2s ease;
 }
 
-.form-group textarea {
-  height: 100px;
-  resize: vertical;
+.floating-label input:focus,
+.floating-label textarea:focus {
+  border-color: #e84315;
 }
 
-input[type="checkbox"] {
+.floating-label label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.5rem;
+  color: #888;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.floating-label textarea:focus + label,
+.floating-label textarea:not(:placeholder-shown) + label {
+  top: -20px;
+  left: 10px;
+  font-size: 1rem;
+  color: #e84315;
+}
+
+/* Espaço para checkbox */
+.space-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.space-form input[type="checkbox"] {
   margin-right: 10px;
 }
 
-.rsvp-form button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  background-color: #e84315;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.8rem;
-  font-family: "Parisienne", cursive;
+.button {
+  border: 0;
+  padding: 15px;
+  font-size: 1.5rem;
   font-weight: 600;
+  background: #e84315;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.5s ease;
+  text-align: center;
+  border-radius: 10px;
 }
 
-.rsvp-form button[type="submit"]:hover {
-  background-color: #d73e12;
+.button-block {
+  font-family: "Parisienne", cursive;
+  font-size: 2rem;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .rsvp-form h2 {
-    font-size: 2rem;
-  }
-
-  .form-group label {
-    font-size: 1rem;
-  }
-
-  .rsvp-form button[type="submit"] {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .rsvp-form h2 {
-    font-size: 1.8rem;
-  }
-
-  .form-group label {
-    font-size: 0.9rem;
-  }
-
-  .rsvp-form button[type="submit"] {
-    font-size: 0.9rem;
-  }
+.button:hover {
+  background: #e84315;
 }

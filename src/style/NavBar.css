@@ -178,6 +178,10 @@ a.active span {
   list-style: none;
 }
 
+.iconColor {
+  color:rgba(19, 35, 47, 0.9);
+}
+
 /* Exibe o ícone do QRCode apenas em telas menores que 768px */
 @media (max-width: 767px) {
   .qrcode-icon-container {
