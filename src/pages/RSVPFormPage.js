@@ -14,6 +14,7 @@ function RSVPFormPage() {
       .then((data) => {
         // Define a URL da API recebida do backend
         setApiUrl(data.apiUrl);
+        console.log('API URL:', data.apiUrl); // Verifique se a URL está correta
       })
       .catch((error) => console.error('Erro ao buscar a configuração da API:', error));
   }, []);
@@ -33,9 +34,11 @@ function RSVPFormPage() {
         }),
       });
 
+      console.log('Status da resposta:', response.status); // Verifique o status da resposta
       const contentType = response.headers.get('Content-Type');
       if (contentType && contentType.includes('application/json')) {
         const data = await response.json();
+        console.log('Resposta da API:', data); // Verifique a resposta da API
         if (data.status === 'success') {
           setRSVPs((prevRSVPs) => [...prevRSVPs, newRSVP]);
         } else {
