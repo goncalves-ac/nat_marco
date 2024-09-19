@@ -7,13 +7,12 @@ function RSVPFormPage() {
   const [rsvps, setRSVPs] = useState([]);
   const [apiUrl, setApiUrl] = useState('');
 
-  useEffect(() => {   
-
-    // Buscar a URL da API dinamicamente
+  useEffect(() => {
+    // Buscar a URL da API através de uma rota do backend
     fetch('/api/config')
       .then((response) => response.json())
       .then((data) => {
-        setApiUrl(data.apiUrl);
+        setApiUrl(data.apiUrl);  // Define a URL da API recebida do backend
       })
       .catch((error) => console.error('Erro ao buscar a configuração da API:', error));
   }, []);
@@ -33,7 +32,6 @@ function RSVPFormPage() {
         }),
       });
 
-      // Verifique se a resposta é JSON
       const contentType = response.headers.get('Content-Type');
       if (contentType && contentType.includes('application/json')) {
         const data = await response.json();
@@ -43,7 +41,6 @@ function RSVPFormPage() {
           console.error('Erro ao salvar RSVP:', data.message);
         }
       } else {
-        // Se a resposta não for JSON, mostre o texto da resposta
         const text = await response.text();
         console.error('Resposta inesperada:', text);
       }

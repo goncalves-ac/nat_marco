@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-require('dotenv').config();
+require('dotenv').config();  // Carrega o .env na raiz do site
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,7 +26,7 @@ db.connect((err) => {
   console.log('Conectado ao banco de dados MySQL');
 });
 
-// Nova rota para fornecer a URL da API ao frontend
+// Rota para fornecer a URL da API ao frontend
 app.get('/api/config', (req, res) => {
   res.json({ apiUrl: process.env.REACT_APP_API_URL });
 });
@@ -55,6 +55,7 @@ app.post('/api/rsvps', (req, res) => {
   });
 });
 
+// Inicia o servidor
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
