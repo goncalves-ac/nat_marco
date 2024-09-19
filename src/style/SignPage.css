@@ -80,6 +80,7 @@ h1 {
   color: rgba(255, 255, 255, 0.5);
   transition: all 0.25s ease;
   font-size: 1.5rem;
+  bottom: 15px;
 }
 
 .field-wrap input {
@@ -97,11 +98,21 @@ h1 {
   border-color: #e84315;
 }
 
+/* Ajustes nos labels */
 .field-wrap input:focus + label,
-.field-wrap input:not(:placeholder-shown) + label {
-  transform: translateY(-20px);
+.field-wrap input.focused + label {
+  opacity: 0; /* Tornar o label invisível */
+  transform: translateY(-20px); /* Movê-lo um pouco para cima */
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Garantir que o label reapareça se o input estiver vazio e perder o foco */
+.field-wrap input:not(.focused):placeholder-shown + label {
+  opacity: 1; /* Label reaparece */
+  transform: translateY(6px); /* Reposicionar no lugar inicial */
   font-size: 1.5rem;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.5);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .button {
