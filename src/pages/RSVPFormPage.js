@@ -1,68 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import NavBar from './../component/NavBar.js';
-import Countdown from './../component/Countdown.js';
-import RSVPForm from './../component/RSVPForm.js';
+import React, { useState } from 'react';
 
-function RSVPFormPage() {
-  const [rsvps, setRSVPs] = useState([]);
-  const [apiUrl, setApiUrl] = useState('');
+const RSVPFormPage = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        conf: false,
+        message: '',
+        readed: false
+    });
 
-  useEffect(() => {
-    // Buscar a URL da API através de uma rota do backend
-    fetch('/api/config')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Erro ao buscar configuração da API');
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('https://nataliaemarcos.online/api.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            if (result.status === 'success') {
+                alert('Dados salvos com sucesso!');
+            } else {
+                alert('Erro ao salvar os dados: ' + result.message);
+            }
+        } catch (error) {
+            alert('Erro ao enviar dados: ' + error.message);
         }
-        return response.json();
-      })
-      .then((data) => {
-        setApiUrl(data.apiUrl);
-      })
-      .catch((error) => console.error('Erro ao buscar a configuração da API:', error));
-  }, []);
+    };
 
-  const addRSVP = async (newRSVP) => {
-    try {
-      const response = await fetch(`${apiUrl}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: newRSVP.name,
-          conf: newRSVP.conf,
-          message: newRSVP.message,
-          readed: false, // Definido como false por padrão
-        }),
-      });
-
-      const contentType = response.headers.get('Content-Type');
-      if (contentType && contentType.includes('application/json')) {
-        const data = await response.json();
-        if (data.status === 'success') {
-          setRSVPs((prevRSVPs) => [...prevRSVPs, newRSVP]);
-        } else {
-          console.error('Erro ao salvar RSVP:', data.message);
-        }
-      } else {
-        const text = await response.text();
-        console.error('Resposta inesperada:', text);
-      }
-    } catch (error) {
-      console.error('Erro na requisição:', error);
-    }
-  };
-
-  return (
-    <section>
-      <NavBar />
-      <Countdown targetDate="2025-01-05T00:00:00" />
-      <div className="RSVP">
-        <RSVPForm setRSVPs={addRSVP} />
-      </div>
-    </section>
-  );
-}
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Nome"
+                required
+            />
+            <input
+                type="checkbox"
+                name="conf"
+                checked={formData.conf}
+                onChange={handleChange}
+            />
+            <label htmlFor="conf">Confirmar</label>
+            <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Mensagem"
+                required
+            />
+            <input
+                type="checkbox"
+                name="readed"
+                checked={formData.readed}
+                onChange={handleChange}
+            />
+            <label htmlFor="readed">Lido</label>
+            <button type="submit">Enviar</button>
+        </form>
+    );
+};
 
 export default RSVPFormPage;

@@ -7,8 +7,9 @@ const path = require('path'); // Para especificar caminhos, se necessário
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(bodyParser.json());
+// Middleware
+app.use(cors()); // Permite requisições de diferentes origens
+app.use(bodyParser.json()); // Analisa o corpo das requisições em JSON
 
 // Configuração da conexão com o banco de dados
 const db = mysql.createConnection({
@@ -18,6 +19,7 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
+// Conexão com o banco de dados
 db.connect((err) => {
   if (err) {
     console.error('Erro ao conectar ao banco de dados:', err);
@@ -45,9 +47,11 @@ app.post('/api/rsvps', (req, res) => {
   });
 });
 
-// Serve arquivos estáticos se for necessário (opcional)
+// Servir arquivos estáticos (se necessário)
+// Se você estiver servindo arquivos estáticos, como uma build do React, descomente e ajuste o caminho
 // app.use(express.static(path.join(__dirname, 'build')));
 
+// Inicializa o servidor
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
