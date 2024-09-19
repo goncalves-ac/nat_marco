@@ -22,6 +22,17 @@ function SignPage () {
     setActiveTab(tab);
   };
 
+  const handleInputFocus = (e) => {
+    e.target.classList.add('focused');
+  };
+  
+  const handleInputBlur = (e) => {
+    if (!e.target.value) {
+      e.target.classList.remove('focused');
+    }
+  };
+  
+
   return (
     <section>
       <NavBar />
@@ -50,56 +61,63 @@ function SignPage () {
                 <form>
                   <div className="top-row">
                     <div className="field-wrap">
-                      <label className={formData.firstName ? "active" : ""}>
-                        Nome<span className="req">*</span>
-                      </label>
                       <input
                         type="text"
                         name="firstName"
                         required
                         value={formData.firstName}
                         onChange={handleInputChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
                       />
-                    </div>
-
-                    <div className="field-wrap">
-                      <label className={formData.lastName ? "active" : ""}>
-                        Sobrenome<span className="req">*</span>
+                      <label className={formData.firstName ? "active" : ""}>
+                        Nome<span className="req">*</span>
                       </label>
+                    </div>
+                    <div className="field-wrap">
                       <input
                         type="text"
                         name="lastName"
                         required
                         value={formData.lastName}
                         onChange={handleInputChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
                       />
+                      <label className={formData.lastName ? "active" : ""}>
+                      Sobrenome<span className="req">*</span>
+                      </label>
                     </div>
                   </div>
 
                   <div className="field-wrap">
-                    <label className={formData.email ? "active" : ""}>
-                      E-mail<span className="req">*</span>
-                    </label>
                     <input
                       type="email"
                       name="email"
                       required
                       value={formData.email}
                       onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
                     />
+                    <label className={formData.email ? "active" : ""}>
+                    E-mail<span className="req">*</span>
+                    </label>
                   </div>
 
                   <div className="field-wrap">
-                    <label className={formData.password ? "active" : ""}>
-                      Senha<span className="req">*</span>
-                    </label>
                     <input
                       type="password"
                       name="password"
                       required
                       value={formData.password}
                       onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
                     />
+                    <label className={formData.password ? "active" : ""}>
+                    Senha<span className="req">*</span>
+                    </label>
                   </div>
 
                   <button type="submit" className="button button-block">
@@ -114,29 +132,33 @@ function SignPage () {
                 <h1>Bem vindo de volta!</h1>
                 <form>
                   <div className="field-wrap">
-                    <label className={formData.email ? "active" : ""}>
-                      E-mail<span className="req">*</span>
-                    </label>
                     <input
                       type="email"
                       name="email"
                       required
                       value={formData.email}
                       onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
                     />
+                    <label className={formData.email ? "active" : ""}>
+                    E-mail<span className="req">*</span>
+                    </label>
                   </div>
 
                   <div className="field-wrap">
-                    <label className={formData.password ? "active" : ""}>
-                      Senha<span className="req">*</span>
-                    </label>
                     <input
                       type="password"
                       name="password"
                       required
                       value={formData.password}
                       onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
                     />
+                    <label className={formData.password ? "active" : ""}>
+                    Senha<span className="req">*</span>
+                    </label>
                   </div>
 
                   <p className="forgot">
