@@ -30,7 +30,7 @@ db.connect((err) => {
 
 // Rota para expor a URL da API ao frontend
 app.get('/api/config', (req, res) => {
-  res.json({ apiUrl: process.env.REACT_APP_API_URL });
+  res.json({ apiUrl: `${process.env.REACT_APP_API_URL}/api/rsvps` });
 });
 
 // Rota para lidar com RSVPs
