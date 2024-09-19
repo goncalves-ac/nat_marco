@@ -10,7 +10,12 @@ function RSVPFormPage() {
   useEffect(() => {
     // Buscar a URL da API através de uma rota do backend
     fetch('/api/config')
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Erro ao buscar configuração da API');
+        }
+        return response.json();
+      })
       .then((data) => {
         // Define a URL da API recebida do backend
         setApiUrl(data.apiUrl);

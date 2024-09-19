@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path'); // Necessário para especificar caminhos
+const path = require('path');
 
 // Configura o dotenv para carregar as variáveis de ambiente do arquivo .env
 require('dotenv').config({ path: path.resolve('/home2/nata3951/.env') });
