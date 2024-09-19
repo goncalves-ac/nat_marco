@@ -1,51 +1,70 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const path = require('path'); // Necessário para especificar caminhos
-require('dotenv').config({ path: path.resolve('/home2/nata3951/.env') }); // Ajuste o caminho conforme necessário
+import React, { useState, useEffect } from 'react';
+import NavBar from './../component/NavBar.js';
+import Countdown from './../component/Countdown.js';
+import RSVPForm from './../component/RSVPForm.js';
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+function RSVPFormPage() {
+  const [rsvps, setRSVPs] = useState([]);
+  const [apiUrl, setApiUrl] = useState('');
 
-app.use(cors());
-app.use(bodyParser.json());
+  useEffect(() => {
+    // Buscar a URL da API através do backend
+    fetch('/api/config')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Received API URL from backend:', data.apiUrl); // Adicione este log para verificar a URL
+        setApiUrl(data.apiUrl);  // Define a URL da API recebida do backend
+      })
+      .catch((error) => console.error('Erro ao buscar a configuração da API:', error));
+  }, []);
 
-// Conexão com o banco de dados usando as variáveis de ambiente do .env
-const mysql = require('mysql');
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+  const addRSVP = async (newRSVP) => {
+    try {
+      console.log('Using API URL:', apiUrl); // Verifique se a apiUrl está definida corretamente
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: newRSVP.name,
+          conf: newRSVP.conf,
+          message: newRSVP.message,
+          readed: false, // Definido como false por padrão
+        }),
+      });
 
-db.connect((err) => {
-  if (err) {
-    console.error('Erro ao conectar ao banco de dados:', err);
-    return;
-  }
-  console.log('Conectado ao banco de dados MySQL');
-});
-
-// Rota para expor a URL da API ao frontend
-app.get('/api/config', (req, res) => {
-  res.json({ apiUrl: process.env.REACT_APP_API_URL });
-});
-
-// Rota para lidar com RSVPs
-app.post('/api/rsvps', (req, res) => {
-  const { name, conf, message } = req.body;
-  const newRSVP = { name, conf, message };
-
-  db.query('INSERT INTO rsvps SET ?', newRSVP, (err, results) => {
-    if (err) {
-      res.status(500).json({ error: err });
-      return;
+      const contentType = response.headers.get('Content-Type');
+      if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        if (data.status === 'success') {
+          setRSVPs((prevRSVPs) => [...prevRSVPs, newRSVP]);
+        } else {
+          console.error('Erro ao salvar RSVP:', data.message);
+        }
+      } else {
+        const text = await response.text();
+        console.error('Resposta inesperada:', text);
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
     }
-    res.status(201).json({ id: results.insertId, ...newRSVP });
-  });
-});
+  };
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  return (
+    <section>
+      <NavBar />
+      <Countdown targetDate="2025-01-05T00:00:00" />
+      <div className="RSVP">
+        <RSVPForm setRSVPs={addRSVP} />
+      </div>
+    </section>
+  );
+}
+
+export default RSVPFormPage;
