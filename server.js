@@ -29,12 +29,12 @@ db.connect((err) => {
 });
 
 // Rota para expor a URL da API ao frontend
-app.get('/api/config', (req, res) => {
+app.get('/api.php', (req, res) => {
   res.json({ apiUrl: `${process.env.REACT_APP_API_URL}/api/rsvps` });
 });
 
 // Rota para lidar com RSVPs
-app.post('/api/rsvps', (req, res) => {
+app.post('/api.php', (req, res) => {
   const { name, conf, message } = req.body;
   const newRSVP = { name, conf, message };
 

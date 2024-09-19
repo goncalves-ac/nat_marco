@@ -9,7 +9,7 @@ function RSVPFormPage() {
 
   useEffect(() => {
     // Buscar a URL da API através de uma rota do backend
-    fetch('https://nataliaemarcos.online/api/config')
+    fetch('https://nataliaemarcos.online/api.php')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Erro ao buscar configuração da API');
