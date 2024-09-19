@@ -33,7 +33,7 @@ function SignPage () {
               className={`tab ${activeTab === "signup" ? "active" : ""}`}
               onClick={(e) => handleTabClick("signup", e)}
             >
-              <a href="#signup">Inscrever-se</a>
+              <a href="#signup">Inscrever</a>
             </li>
             <li
               className={`tab ${activeTab === "login" ? "active" : ""}`}

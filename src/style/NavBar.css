@@ -183,7 +183,7 @@ a.active span {
 }
 
 /* Exibe o ícone do QRCode apenas em telas menores que 768px */
-@media (max-width: 767px) {
+@media (max-width: 850px) {
   .qrcode-icon-container {
     display: block; /* Garante que o container do ícone esteja visível */
   }
