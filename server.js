@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path'); // Necessário para especificar caminhos
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') }); // Configura o dotenv para pegar o .env fora de public_html
+require('dotenv').config({ path: path.resolve('/home2/nata3951/.env') }); // Ajuste o caminho conforme necessário
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // Conexão com o banco de dados usando as variáveis de ambiente do .env
 const mysql = require('mysql');
 const db = mysql.createConnection({
-  host: process.env.REACT_APP_API_URL,
+  host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
