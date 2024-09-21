@@ -1,47 +1,52 @@
-import React, { useState } from 'react';
-import NavBar from './../component/NavBar.js';
-import Countdown from './../component/Countdown.js';
-import RSVPForm from './../component/RSVPForm.js';
+import React, { useState } from "react";
+import NavBar from "./../component/NavBar.js";
+import Countdown from "./../component/Countdown.js";
+import RSVPForm from "./../component/RSVPForm.js";
+import FeedbackMessage from "./../component/FeedbackMessage.js"; 
 
 function RSVPFormPage() {
   const [rsvps, setRSVPs] = useState([]);
-  const apiUrl = 'https://nataliaemarcos.online/api.php'; // API URL direta
+  const [feedback, setFeedback] = useState(null);
+  const [formData, setFormData] = useState({ name: '', conf: false, message: '' });
+  const [feedbackVisible, setFeedbackVisible] = useState(false); // Estado para controle de visibilidade do feedback
+  const apiUrl = "https://nataliaemarcos.online/api.php"; 
 
-  const addRSVP = async (newRSVP) => {
+  const addRSVP = async () => {
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: newRSVP.name,
-          conf: newRSVP.conf,
-          message: newRSVP.message,
-          readed: false, // Definido como false por padrão
+          name: formData.name,
+          conf: formData.conf,
+          message: formData.message,
+          readed: false,
         }),
       });
 
-      // Verifica se o tipo de conteúdo da resposta é JSON
-      const contentType = response.headers.get('Content-Type');
-      if (contentType && contentType.includes('application/json')) {
-        const data = await response.json();
-
-        // Verifica se o status da resposta é "success"
-        if (data.status === 'success') {
-          // Adiciona o RSVP à lista
-          setRSVPs((prevRSVPs) => [...prevRSVPs, newRSVP]);
-        } else {
-          console.error('Erro ao salvar RSVP:', data.message);
-        }
+      const data = await response.json();
+      if (data.status === "success") {
+        setRSVPs((prevRSVPs) => [...prevRSVPs, formData]);
+        setFeedback({ type: "success", message: "Presença confirmada com sucesso!" });
+        clearFields(); // Limpa os campos apenas em caso de sucesso
       } else {
-        // Caso o conteúdo não seja JSON, trata a resposta como texto
-        const text = await response.text();
-        console.error('Resposta inesperada:', text);
+        setFeedback({ type: "error", message: data.message || "Erro ao salvar RSVP." });
       }
+      setFeedbackVisible(true); // Mostra a mensagem de feedback após cada submissão
     } catch (error) {
-      console.error('Erro na requisição:', error);
+      setFeedback({ type: "error", message: "Erro na requisição. Tente novamente." });
+      setFeedbackVisible(true); // Mostra a mensagem de feedback mesmo em erro
     }
+  };
+
+  const clearFields = () => {
+    setFormData({ name: '', conf: false, message: '' });
+  };
+
+  const handleFeedbackClick = () => {
+    setFeedbackVisible(false); // Oculta a mensagem ao clicar
   };
 
   return (
@@ -49,7 +54,18 @@ function RSVPFormPage() {
       <NavBar />
       <Countdown targetDate="2025-01-05T00:00:00" />
       <div className="RSVP">
-        <RSVPForm setRSVPs={addRSVP} />
+        <RSVPForm 
+          formData={formData} 
+          setFormData={setFormData} 
+          setRSVPs={addRSVP} 
+        />
+        {feedbackVisible && feedback && (
+          <FeedbackMessage 
+            type={feedback.type} 
+            message={feedback.message} 
+            onClick={handleFeedbackClick} // Passa a função de ocultar
+          />
+        )}
       </div>
     </section>
   );

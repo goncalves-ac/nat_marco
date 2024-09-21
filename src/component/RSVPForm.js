@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../style/RSVPForm.css';
 
-const RSVPForm = ({ setRSVPs }) => {
-  const [name, setName] = useState('');
-  const [conf, setConf] = useState(false);
-  const [message, setMessage] = useState('');
+const RSVPForm = ({ setRSVPs, formData, setFormData }) => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newRSVP = { name, conf, message };
-    setRSVPs(newRSVP);
+    setRSVPs(); // Chama a função que faz a requisição
     navigate('/Confirmations');
   };
 
@@ -24,10 +20,10 @@ const RSVPForm = ({ setRSVPs }) => {
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
-            placeholder=" " // Adicione o placeholder com espaço em branco para o efeito funcionar corretamente
+            placeholder=" "
           />
           <label htmlFor="name">Nome:</label>
         </div>
@@ -36,8 +32,8 @@ const RSVPForm = ({ setRSVPs }) => {
           <input
             type="checkbox"
             id="conf"
-            checked={conf}
-            onChange={(e) => setConf(e.target.checked)}
+            checked={formData.conf}
+            onChange={(e) => setFormData({ ...formData, conf: e.target.checked })}
           />
           <label htmlFor="conf" className="conf">Confirmo minha presença</label>
         </div>
@@ -45,9 +41,9 @@ const RSVPForm = ({ setRSVPs }) => {
         <div className="form-group floating-label">
           <textarea
             id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder=" " // Adicione o placeholder com espaço em branco para o efeito funcionar corretamente
+            value={formData.message}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            placeholder=" "
           ></textarea>
           <label htmlFor="message">Mensagem aos noivos (opcional):</label>
         </div>
