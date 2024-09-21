@@ -104,3 +104,10 @@
 .button:hover {
   background: #e84315;
 }
+
+
+@media (max-width: 600px) {
+  .rsvp-form-container {
+    max-width: 80%;
+  }
+}
