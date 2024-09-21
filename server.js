@@ -2,14 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const path = require('path'); // Para especificar caminhos, se necessário
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors()); // Permite requisições de diferentes origens
-app.use(bodyParser.json()); // Analisa o corpo das requisições em JSON
+app.use(cors());
+app.use(bodyParser.json());
 
 // Configuração da conexão com o banco de dados
 const db = mysql.createConnection({
@@ -28,13 +27,8 @@ db.connect((err) => {
   console.log('Conectado ao banco de dados MySQL');
 });
 
-// Rota para expor a URL da API ao frontend
-app.get('/api.php', (req, res) => {
-  res.json({ apiUrl: `${process.env.REACT_APP_API_URL}/api/rsvps` });
-});
-
 // Rota para lidar com RSVPs
-app.post('/api.php', (req, res) => {
+app.post('/rsvps', (req, res) => { // Rota renomeada
   const { name, conf, message } = req.body;
   const newRSVP = { name, conf, message };
 
@@ -46,10 +40,6 @@ app.post('/api.php', (req, res) => {
     res.status(201).json({ id: results.insertId, ...newRSVP });
   });
 });
-
-// Servir arquivos estáticos (se necessário)
-// Se você estiver servindo arquivos estáticos, como uma build do React, descomente e ajuste o caminho
-// app.use(express.static(path.join(__dirname, 'build')));
 
 // Inicializa o servidor
 app.listen(PORT, () => {

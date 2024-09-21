@@ -1,26 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import RSVPForm from './../component/RSVPForm.js';
 
 function RSVPFormPage() {
   const [rsvps, setRSVPs] = useState([]);
-  const [apiUrl, setApiUrl] = useState('');
-
-  useEffect(() => {
-    // Buscar a URL da API através de uma rota do backend
-    fetch('https://nataliaemarcos.online/api.php')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Erro ao buscar configuração da API');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setApiUrl(data.apiUrl);
-      })
-      .catch((error) => console.error('Erro ao buscar a configuração da API:', error));
-  }, []);
+  const apiUrl = 'https://nataliaemarcos.online/api.php'; // API URL direta
 
   const addRSVP = async (newRSVP) => {
     try {
