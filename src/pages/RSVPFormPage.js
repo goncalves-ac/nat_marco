@@ -22,15 +22,20 @@ function RSVPFormPage() {
         }),
       });
 
+      // Verifica se o tipo de conteúdo da resposta é JSON
       const contentType = response.headers.get('Content-Type');
       if (contentType && contentType.includes('application/json')) {
         const data = await response.json();
+
+        // Verifica se o status da resposta é "success"
         if (data.status === 'success') {
+          // Adiciona o RSVP à lista
           setRSVPs((prevRSVPs) => [...prevRSVPs, newRSVP]);
         } else {
           console.error('Erro ao salvar RSVP:', data.message);
         }
       } else {
+        // Caso o conteúdo não seja JSON, trata a resposta como texto
         const text = await response.text();
         console.error('Resposta inesperada:', text);
       }
