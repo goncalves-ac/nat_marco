@@ -142,3 +142,21 @@ h1 {
   color: white;
   font-size: 1.5rem;
 }
+
+.status {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.status.success {
+  color: green;
+  border: 2px solid green;
+}
+
+.status.error {
+  color: red;
+  border: 2px solid red;
+}

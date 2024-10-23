@@ -11,15 +11,16 @@ function SignPage () {
     email: "",
     password: "",
   });
-  const [loginMessage, setLoginMessage] = useState(""); // Mensagem de sucesso ou erro no login
-
+  
+  const [signupStatus, setSignupStatus] = useState(null); // Mensagem de sucesso ou erro
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleTabClick = (tab, e) => {
-    e.preventDefault(); // Impede o comportamento padrão do link
+    e.preventDefault();
     setActiveTab(tab);
   };
 
@@ -33,35 +34,37 @@ function SignPage () {
     }
   };
 
-  // Função para lidar com o envio do login
-  const handleSubmitLogin = async (e) => {
-    e.preventDefault();
-    const loginData = {
-      action: "login",
+  const handleFormSubmit = (e) => {
+    e.preventDefault(); // Evita o refresh da página
+
+    const signupData = {
+      action: "signup",
+      firstName: formData.firstName,
+      lastName: formData.lastName,
       email: formData.email,
-      password: formData.password
+      password: formData.password,
     };
 
-    try {
-      const response = await fetch('https://nataliaemarcos.online/user.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      });
-
-      const result = await response.json();
-
-      if (result.status === "success") {
-        setLoginMessage("Login bem-sucedido!");
-        // Redirecionar para a página protegida ou exibir conteúdo
+    // Fazer a requisição para a API
+    fetch("https://nataliaemarcos.online/user.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupData),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.status === "success") {
+        setSignupStatus({ type: "success", message: data.message }); // Mensagem de sucesso
       } else {
-        setLoginMessage(result.message); // Exibe mensagem de erro
+        setSignupStatus({ type: "error", message: data.message }); // Mensagem de erro
       }
-    } catch (error) {
-      setLoginMessage("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente.");
-    }
+    })
+    .catch((error) => {
+      console.error("Erro na requisição:", error);
+      setSignupStatus({ type: "error", message: "Erro no servidor, tente novamente mais tarde." });
+    });
   };
 
   return (
@@ -89,7 +92,7 @@ function SignPage () {
             {activeTab === "signup" && (
               <div id="signup">
                 <h1>Inscreva-se gratuitamente</h1>
-                <form>
+                <form onSubmit={handleFormSubmit}>
                   <div className="top-row">
                     <div className="field-wrap">
                       <input
@@ -155,54 +158,21 @@ function SignPage () {
                     Inicie
                   </button>
                 </form>
+
+                {/* Exibir o status do cadastro */}
+                {signupStatus && (
+                  <div className={`status ${signupStatus.type}`}>
+                    <span>{signupStatus.type === "success" ? "✔" : "✖"}</span> {signupStatus.message}
+                  </div>
+                )}
               </div>
             )}
 
+            {/* Aba de login */}
             {activeTab === "login" && (
               <div id="login">
                 <h1>Bem vindo de volta!</h1>
-                <form onSubmit={handleSubmitLogin}>
-                  <div className="field-wrap">
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      onFocus={handleInputFocus}
-                      onBlur={handleInputBlur}
-                    />
-                    <label className={formData.email ? "active" : ""}>
-                    E-mail<span className="req">*</span>
-                    </label>
-                  </div>
-
-                  <div className="field-wrap">
-                    <input
-                      type="password"
-                      name="password"
-                      required
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      onFocus={handleInputFocus}
-                      onBlur={handleInputBlur}
-                    />
-                    <label className={formData.password ? "active" : ""}>
-                    Senha<span className="req">*</span>
-                    </label>
-                  </div>
-
-                  <p className="forgot">
-                    <a href="#" className="LinkForgot">Esqueceu sua senha?</a>
-                  </p>
-
-                  <button className="button button-block" type="submit">
-                    Entre
-                  </button>
-
-                  {/* Exibe mensagem de erro ou sucesso no login */}
-                  {loginMessage && <p className="login-message">{loginMessage}</p>}
-                </form>
+                {/* Formulário de login */}
               </div>
             )}
           </div>
