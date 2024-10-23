@@ -11,6 +11,7 @@ function SignPage () {
     email: "",
     password: "",
   });
+  const [loginMessage, setLoginMessage] = useState(""); // Mensagem de sucesso ou erro no login
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +32,37 @@ function SignPage () {
       e.target.classList.remove('focused');
     }
   };
-  
+
+  // Função para lidar com o envio do login
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
+    const loginData = {
+      action: "login",
+      email: formData.email,
+      password: formData.password
+    };
+
+    try {
+      const response = await fetch('https://nataliaemarcos.online/user.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      const result = await response.json();
+
+      if (result.status === "success") {
+        setLoginMessage("Login bem-sucedido!");
+        // Redirecionar para a página protegida ou exibir conteúdo
+      } else {
+        setLoginMessage(result.message); // Exibe mensagem de erro
+      }
+    } catch (error) {
+      setLoginMessage("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente.");
+    }
+  };
 
   return (
     <section>
@@ -130,7 +161,7 @@ function SignPage () {
             {activeTab === "login" && (
               <div id="login">
                 <h1>Bem vindo de volta!</h1>
-                <form>
+                <form onSubmit={handleSubmitLogin}>
                   <div className="field-wrap">
                     <input
                       type="email"
@@ -165,7 +196,12 @@ function SignPage () {
                     <a href="#" className="LinkForgot">Esqueceu sua senha?</a>
                   </p>
 
-                  <button className="button button-block">Entre</button>
+                  <button className="button button-block" type="submit">
+                    Entre
+                  </button>
+
+                  {/* Exibe mensagem de erro ou sucesso no login */}
+                  {loginMessage && <p className="login-message">{loginMessage}</p>}
                 </form>
               </div>
             )}
@@ -174,6 +210,6 @@ function SignPage () {
       </div>
     </section>
   );
-};
+}
 
 export default SignPage;
