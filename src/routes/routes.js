@@ -27,7 +27,7 @@ function AppRoutes() {
       <Route path="/Mensagens" element={<PostIt />} />
       <Route path="/QRCodePix" element={<QRCodePixPage />} />
       <Route path="/Login" element={<LoginPage />} />
-      <Route path="/confirmed-guests" element={<ConfirmedGuestsPage />} />
+      <Route path="/ConfirmedGuests" element={<ConfirmedGuestsPage />} />
     </Routes>
   );
 }

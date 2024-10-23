@@ -69,6 +69,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link to="/ConfirmedGuests" onClick={toggleMenu}>
+              <i className="fa-solid fa-list fa-2x iconColor"></i>
+              <span>Listagem de presença</span>
+            </Link>
+          </li>
+          <li>
             <Link to="/Mensagens" onClick={toggleMenu}>
               <i className="fa-solid fa-envelope fa-2x iconColor"></i>
               <span>Mensagens</span>
