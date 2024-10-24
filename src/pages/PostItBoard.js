@@ -89,6 +89,23 @@ const PostItBoard = () => {
     const closeModal = () => {
         setModalOpen(false);
     };
+    const getRandomColor = () => {
+        const getRandomValue = () => Math.floor(Math.random() * 256);
+        
+        // Garante que a cor não seja preta (0, 0, 0) ou branca (255, 255, 255)
+        let r, g, b;
+        do {
+            r = getRandomValue();
+            g = getRandomValue();
+            b = getRandomValue();
+        } while ((r === 0 && g === 0 && b === 0) || (r === 255 && g === 255 && b === 255));
+        
+        return `rgb(${r}, ${g}, ${b})`;
+    };
+    
+    // Exemplo de uso
+    console.log(getRandomColor());
+    
 
     return (
         <section>
