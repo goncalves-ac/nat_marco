@@ -57,6 +57,7 @@ function SignPage () {
     .then((data) => {
       if (data.status === "success") {
         setSignupStatus({ type: "success", message: data.message }); // Mensagem de sucesso
+        window.location.href = '/VenusMars';
       } else {
         setSignupStatus({ type: "error", message: data.message }); // Mensagem de erro
       }

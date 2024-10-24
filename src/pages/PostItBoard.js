@@ -4,35 +4,14 @@ import Countdown from './../component/Countdown.js';
 import "./../style/PostItBoard.css";
 
 const PostItBoard = () => {
-    /*const messages = [
+    const [canRead, setCanRead] = useState(false); // Estado para verificar se o usuário pode ler
+    const [loading, setLoading] = useState(true); // Estado para loading
+
+    const messages = [
         { name: "Alice1", message: "Parabéns pelo casamento! Parabéns pelo casamento! Parabéns pelo casamento! Parabéns pelo casamento!" },
         { name: "Alice2", message: "Parabéns pelo casamento!" },
-        { name: "Alice3", message: "Parabéns pelo casamento!" },
-        { name: "Alice4", message: "Parabéns pelo casamento!" },
-        { name: "Alice5", message: "Parabéns pelo casamento!" },
-        { name: "Alice6", message: "Parabéns pelo casamento!" },
-        { name: "Alice7", message: "Parabéns pelo casamento!" },
-        { name: "Alice8", message: "Parabéns pelo casamento!" },
-        { name: "Alice9", message: "Parabéns pelo casamento!" },
-        { name: "Bob1", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob2", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob3", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob4", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob5", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob6", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob7", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob8", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Bob9", message: "Desejo a vocês uma vida cheia de amor e felicidade!" },
-        { name: "Ana1", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana2", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana3", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana4", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana5", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana6", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana7", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana8", message: "Desejo a vocês uma vida cheia!" },
-        { name: "Ana9", message: "Desejo a vocês uma vida cheia!" },
-    ];*/
+        // ... outras mensagens
+    ];
 
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPage, setCurrentPage] = useState(1);
@@ -40,21 +19,31 @@ const PostItBoard = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({ name: '', message: '' });
 
-    // Lista de cores dos post-its
-    const postItColors = ["#e8431570", "#FFD70070"];
-
-    // Função para gerar uma cor aleatória a partir da lista
-    const getRandomColor = () => {
-        return postItColors[Math.floor(Math.random() * postItColors.length)];
+    // Função para verificar se o usuário pode ler
+    const checkUserAccess = async () => {
+        try {
+            const response = await fetch('https://nataliaemarcos.online/api.php', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Adicione o token ou outras informações necessárias no cabeçalho se precisar
+                },
+            });
+            const data = await response.json();
+            if (data.canRead) {
+                setCanRead(true);
+            }
+        } catch (error) {
+            console.error("Erro ao verificar acesso do usuário:", error);
+        } finally {
+            setLoading(false); // Define loading como false após a verificação
+        }
     };
 
-    // Função para gerar uma rotação aleatória
-    const getRandomRotation = () => {
-        return `${Math.random() * 10 - 5}deg`;
-    };
-
-    // Ajustar itemsPerPage com base na largura da tela
     useEffect(() => {
+        checkUserAccess(); // Chama a função ao montar o componente
+
+        // Ajustar itemsPerPage com base na largura da tela
         const updateItemsPerPage = () => {
             if (window.innerWidth < 1051) {
                 setItemsPerPage(messages.length); // Exibe todas as mensagens em uma página
@@ -69,6 +58,14 @@ const PostItBoard = () => {
         // Cleanup
         return () => window.removeEventListener("resize", updateItemsPerPage);
     }, [messages.length]);
+
+    if (loading) {
+        return <div>Carregando...</div>; // Exibe uma mensagem de carregamento enquanto verifica o acesso
+    }
+
+    if (!canRead) {
+        return <div>Acesso negado. Você não tem permissão para ver esta página.</div>; // Mensagem de acesso negado
+    }
 
     const totalPages = Math.ceil(messages.length / itemsPerPage);
     const currentMessages = messages.slice(
