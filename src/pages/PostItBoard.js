@@ -4,13 +4,12 @@ import Countdown from './../component/Countdown.js';
 import "./../style/PostItBoard.css";
 
 const PostItBoard = () => {
-    /*const messages = [
+    const messages = [
         { name: "Alice1", message: "Parabéns pelo casamento! Parabéns pelo casamento! Parabéns pelo casamento! Parabéns pelo casamento!" },
         { name: "Alice2", message: "Parabéns pelo casamento!" },
         { name: "Alice3", message: "Parabéns pelo casamento!" },
         { name: "Alice4", message: "Parabéns pelo casamento!" },
         { name: "Alice5", message: "Parabéns pelo casamento!" },
-        { name: "Alice6", message: "Parabéns pelo casamen
         { name: "Alice7", message: "Parabéns pelo casamento!" },
         { name: "Alice8", message: "Parabéns pelo casamento!" },
         { name: "Alice9", message: "Parabéns pelo casamento!" },
@@ -32,7 +31,7 @@ const PostItBoard = () => {
         { name: "Ana7", message: "Desejo a vocês uma vida cheia!" },
         { name: "Ana8", message: "Desejo a vocês uma vida cheia!" },
         { name: "Ana9", message: "Desejo a vocês uma vida cheia!" },
-    ];*/
+    ];
 
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPage, setCurrentPage] = useState(1);
