@@ -9,6 +9,7 @@ import MDireita from './../img/molduraDireita.png';
 import MEsquerda from './../img/molduraEsquerda.png';
 
 const Navbar = () => {
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
