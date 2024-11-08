@@ -12,7 +12,7 @@ function SignPage () {
     password: "",
   });
   
-  const [signupStatus, setSignupStatus] = useState(null); // Mensagem de sucesso ou erro
+  const [statusMessage, setStatusMessage] = useState(null); // Mensagem de sucesso ou erro
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +22,7 @@ function SignPage () {
   const handleTabClick = (tab, e) => {
     e.preventDefault();
     setActiveTab(tab);
+    setStatusMessage(null); // Reseta a mensagem ao mudar de aba
   };
 
   const handleInputFocus = (e) => {
@@ -37,13 +38,17 @@ function SignPage () {
   const handleFormSubmit = (e) => {
     e.preventDefault(); // Evita o refresh da página
 
-    const signupData = {
-      action: "signup",
-      firstName: formData.firstName,
-      lastName: formData.lastName,
+    const action = activeTab === "signup" ? "signup" : "login";
+    const requestData = {
+      action,
       email: formData.email,
       password: formData.password,
     };
+
+    if (action === "signup") {
+      requestData.firstName = formData.firstName;
+      requestData.lastName = formData.lastName;
+    }
 
     // Fazer a requisição para a API
     fetch("https://nataliaemarcos.online/user.php", {
@@ -51,20 +56,24 @@ function SignPage () {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(signupData),
+      body: JSON.stringify(requestData),
     })
     .then((response) => response.json())
     .then((data) => {
       if (data.status === "success") {
-        setSignupStatus({ type: "success", message: data.message }); // Mensagem de sucesso
-        window.location.href = '/VenusMars';
+        if (action === "login") {
+          localStorage.setItem("isLoggedIn", "true"); // Salva o status de login no localStorage
+          window.location.href = '/VenusMars'; // Redireciona após login
+        } else {
+          setStatusMessage({ type: "success", message: data.message }); // Mensagem de sucesso no cadastro
+        }
       } else {
-        setSignupStatus({ type: "error", message: data.message }); // Mensagem de erro
+        setStatusMessage({ type: "error", message: data.message }); // Mensagem de erro
       }
     })
     .catch((error) => {
       console.error("Erro na requisição:", error);
-      setSignupStatus({ type: "error", message: "Erro no servidor, tente novamente mais tarde." });
+      setStatusMessage({ type: "error", message: "Erro no servidor, tente novamente mais tarde." });
     });
   };
 
@@ -159,13 +168,6 @@ function SignPage () {
                     Inicie
                   </button>
                 </form>
-
-                {/* Exibir o status do cadastro */}
-                {signupStatus && (
-                  <div className={`status ${signupStatus.type}`}>
-                    <span>{signupStatus.type === "success" ? "✔" : "✖"}</span> {signupStatus.message}
-                  </div>
-                )}
               </div>
             )}
 
@@ -173,10 +175,50 @@ function SignPage () {
             {activeTab === "login" && (
               <div id="login">
                 <h1>Bem vindo de volta!</h1>
-                {/* Formulário de login */}
+                <form onSubmit={handleFormSubmit}>
+                  <div className="field-wrap">
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                    <label className={formData.email ? "active" : ""}>
+                      E-mail<span className="req">*</span>
+                    </label>
+                  </div>
+
+                  <div className="field-wrap">
+                    <input
+                      type="password"
+                      name="password"
+                      required
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                    <label className={formData.password ? "active" : ""}>
+                      Senha<span className="req">*</span>
+                    </label>
+                  </div>
+
+                  <button type="submit" className="button button-block">
+                    Entrar
+                  </button>
+                </form>
               </div>
             )}
           </div>
+          {/* Exibir a mensagem de status para ambos os formulários */}
+          {statusMessage && (
+            <div className={`status ${statusMessage.type}`}>
+              <span>{statusMessage.type === "success" ? "✔" : "✖"}</span> {statusMessage.message}
+            </div>
+          )}
         </div>
       </div>
     </section>

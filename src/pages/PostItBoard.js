@@ -10,6 +10,7 @@ const PostItBoard = () => {
         { name: "Alice3", message: "Parabéns pelo casamento!" },
         { name: "Alice4", message: "Parabéns pelo casamento!" },
         { name: "Alice5", message: "Parabéns pelo casamento!" },
+        { name: "Alice6", message: "Parabéns pelo casamento!" },
         { name: "Alice7", message: "Parabéns pelo casamento!" },
         { name: "Alice8", message: "Parabéns pelo casamento!" },
         { name: "Alice9", message: "Parabéns pelo casamento!" },
@@ -39,31 +40,21 @@ const PostItBoard = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({ name: '', message: '' });
 
-    // Função para verificar se o usuário pode ler
-    const checkUserAccess = async () => {
-        try {
-            const response = await fetch('https://nataliaemarcos.online/api.php', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Adicione o token ou outras informações necessárias no cabeçalho se precisar
-                },
-            });
-            const data = await response.json();
-            if (data.canRead) {
-                setCanRead(true);
-            }
-        } catch (error) {
-            console.error("Erro ao verificar acesso do usuário:", error);
-        } finally {
-            setLoading(false); // Define loading como false após a verificação
-        }
+    // Lista de cores dos post-its
+    const postItColors = ["#e8431570", "#FFD70070"];
+
+    // Função para gerar uma cor aleatória a partir da lista
+    const getRandomColor = () => {
+        return postItColors[Math.floor(Math.random() * postItColors.length)];
     };
 
-    useEffect(() => {
-        checkUserAccess(); // Chama a função ao montar o componente
+    // Função para gerar uma rotação aleatória
+    const getRandomRotation = () => {
+        return `${Math.random() * 10 - 5}deg`;
+    };
 
-        // Ajustar itemsPerPage com base na largura da tela
+    // Ajustar itemsPerPage com base na largura da tela
+    useEffect(() => {
         const updateItemsPerPage = () => {
             if (window.innerWidth < 1051) {
                 setItemsPerPage(messages.length); // Exibe todas as mensagens em uma página
@@ -78,14 +69,6 @@ const PostItBoard = () => {
         // Cleanup
         return () => window.removeEventListener("resize", updateItemsPerPage);
     }, [messages.length]);
-
-    if (loading) {
-        return <div>Carregando...</div>; // Exibe uma mensagem de carregamento enquanto verifica o acesso
-    }
-
-    if (!canRead) {
-        return <div>Acesso negado. Você não tem permissão para ver esta página.</div>; // Mensagem de acesso negado
-    }
 
     const totalPages = Math.ceil(messages.length / itemsPerPage);
     const currentMessages = messages.slice(
@@ -109,23 +92,6 @@ const PostItBoard = () => {
     const closeModal = () => {
         setModalOpen(false);
     };
-    const getRandomColor = () => {
-        const getRandomValue = () => Math.floor(Math.random() * 256);
-        
-        // Garante que a cor não seja preta (0, 0, 0) ou branca (255, 255, 255)
-        let r, g, b;
-        do {
-            r = getRandomValue();
-            g = getRandomValue();
-            b = getRandomValue();
-        } while ((r === 0 && g === 0 && b === 0) || (r === 255 && g === 255 && b === 255));
-        
-        return `rgb(${r}, ${g}, ${b})`;
-    };
-    
-    // Exemplo de uso
-    console.log(getRandomColor());
-    
 
     return (
         <section>
