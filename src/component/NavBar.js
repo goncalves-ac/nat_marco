@@ -1,5 +1,4 @@
-// src/components/Navbar.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import './../style/NavBar.css';
@@ -9,8 +8,18 @@ import MDireita from './../img/molduraDireita.png';
 import MEsquerda from './../img/molduraEsquerda.png';
 
 const Navbar = () => {
-  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [canRead, setCanRead] = useState(false); // Estado para controlar a permissão 'canRead'
+
+  useEffect(() => {
+    // Verifica se o usuário está logado e se possui a permissão 'canRead'
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const userCanRead = JSON.parse(localStorage.getItem("canRead")); // Obtém a permissão 'canRead' do localStorage
+
+    if (loggedIn && userCanRead) {
+      setCanRead(true); // Se estiver logado e com permissão, define canRead como true
+    }
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -21,7 +30,7 @@ const Navbar = () => {
       <img src={MDireita} alt="groom" className="MDireta" />
       <img src={MEsquerda} alt="groom" className="MEsquerda" />
       <nav className={`navbar ${isMenuOpen ? 'open' : ''}`}>
-      <button className={`menu-toggle ${isMenuOpen ? 'show' : ''}`} onClick={toggleMenu}>
+        <button className={`menu-toggle ${isMenuOpen ? 'show' : ''}`} onClick={toggleMenu}>
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -69,18 +78,25 @@ const Navbar = () => {
               <span>Confirmar presença</span>
             </Link>
           </li>
-          <li>
-            <Link to="/ConfirmedGuests" onClick={toggleMenu}>
-              <i className="fa-solid fa-list fa-2x iconColor"></i>
-              <span>Listagem de presença</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/Mensagens" onClick={toggleMenu}>
-              <i className="fa-solid fa-envelope fa-2x iconColor"></i>
-              <span>Mensagens</span>
-            </Link>
-          </li>
+          
+          {/* Renderiza as páginas de Listagem de presença e Mensagens somente se o usuário tiver canRead */}
+          {canRead && (
+            <>
+              <li>
+                <Link to="/ConfirmedGuests" onClick={toggleMenu}>
+                  <i className="fa-solid fa-list fa-2x iconColor"></i>
+                  <span>Listagem de presença</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/Mensagens" onClick={toggleMenu}>
+                  <i className="fa-solid fa-envelope fa-2x iconColor"></i>
+                  <span>Mensagens</span>
+                </Link>
+              </li>
+            </>
+          )}
+
           <li>
             <Link to="/Login" onClick={toggleMenu}>
               <i className="fa-solid fa-right-to-bracket fa-2x iconColor"></i>

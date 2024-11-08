@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from './../component/NavBar.js';
 import Countdown from './../component/Countdown.js';
 import "./../style/SignPage.css";
@@ -13,6 +13,14 @@ function SignPage () {
   });
   
   const [statusMessage, setStatusMessage] = useState(null); // Mensagem de sucesso ou erro
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de login
+  
+  useEffect(() => {
+    // Verifica o estado de login ao carregar a página
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -63,6 +71,7 @@ function SignPage () {
       if (data.status === "success") {
         if (action === "login") {
           localStorage.setItem("isLoggedIn", "true"); // Salva o status de login no localStorage
+          setIsLoggedIn(true); // Atualiza o estado de login
           window.location.href = '/VenusMars'; // Redireciona após login
         } else {
           setStatusMessage({ type: "success", message: data.message }); // Mensagem de sucesso no cadastro
@@ -83,23 +92,29 @@ function SignPage () {
       <Countdown targetDate="2025-01-05T00:00:00" />
       <div className="form-container">
         <div className="form">
-          <ul className="tab-group">
-            <li
-              className={`tab ${activeTab === "signup" ? "active" : ""}`}
-              onClick={(e) => handleTabClick("signup", e)}
-            >
-              <a href="#signup">Inscrever</a>
-            </li>
-            <li
-              className={`tab ${activeTab === "login" ? "active" : ""}`}
-              onClick={(e) => handleTabClick("login", e)}
-            >
-              <a href="#login">Conecte-se</a>
-            </li>
-          </ul>
+          {!isLoggedIn ? (
+            <ul className="tab-group">
+              <li
+                className={`tab ${activeTab === "signup" ? "active" : ""}`}
+                onClick={(e) => handleTabClick("signup", e)}
+              >
+                <a href="#signup">Inscrever</a>
+              </li>
+              <li
+                className={`tab ${activeTab === "login" ? "active" : ""}`}
+                onClick={(e) => handleTabClick("login", e)}
+              >
+                <a href="#login">Conecte-se</a>
+              </li>
+            </ul>
+          ) : (
+            <div className="logged-in-message">
+              <h2>Você já está logado!</h2>
+            </div>
+          )}
 
           <div className="tab-content">
-            {activeTab === "signup" && (
+            {activeTab === "signup" && !isLoggedIn && (
               <div id="signup">
                 <h1>Inscreva-se gratuitamente</h1>
                 <form onSubmit={handleFormSubmit}>
@@ -172,7 +187,7 @@ function SignPage () {
             )}
 
             {/* Aba de login */}
-            {activeTab === "login" && (
+            {activeTab === "login" && !isLoggedIn && (
               <div id="login">
                 <h1>Bem vindo de volta!</h1>
                 <form onSubmit={handleFormSubmit}>

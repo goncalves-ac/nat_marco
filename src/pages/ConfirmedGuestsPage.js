@@ -8,6 +8,9 @@ const ConfirmedGuestsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
+  // Verifica se o usuário tem permissão para ver a página
+  const canRead = JSON.parse(localStorage.getItem('canRead'));
+
   useEffect(() => {
     const fetchConfirmedGuests = async () => {
       try {
@@ -31,29 +34,37 @@ const ConfirmedGuestsPage = () => {
   return (
     <section className="confirmed-guests-section">
       <NavBar />
-      <h1>Convidados Confirmados</h1>
-      <div className="confirmed-guests-container">
-        <ul>
-          {selectedGuests.map((guest, index) => (
-            <li key={index} className="guest-item">
-              <p><strong>Nome:</strong> {guest.name}</p>
-              {guest.message && <p><strong>Mensagem:</strong> {guest.message}</p>}
-            </li>
-          ))}
-        </ul>
+      {canRead ? (
+        <>
+          <h1>Convidados Confirmados</h1>
+          <div className="confirmed-guests-container">
+            <ul>
+              {selectedGuests.map((guest, index) => (
+                <li key={index} className="guest-item">
+                  <p><strong>Nome:</strong> {guest.name}</p>
+                  {guest.message && <p><strong>Mensagem:</strong> {guest.message}</p>}
+                </li>
+              ))}
+            </ul>
 
-        <div className="pagination">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={currentPage === index + 1 ? 'active' : ''}
-              onClick={() => handlePageChange(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
+            <div className="pagination">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  className={currentPage === index + 1 ? 'active' : ''}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="access-denied-message">
+          <h2>Você não tem permissão para acessar esta página.</h2>
         </div>
-      </div>
+      )}
     </section>
   );
 };
