@@ -71,6 +71,7 @@ function SignPage () {
       if (data.status === "success") {
         if (action === "login") {
           localStorage.setItem("isLoggedIn", "true"); // Salva o status de login no localStorage
+          localStorage.setItem("canRead", data.canRead); // Salva o status de canRead no localStorage
           setIsLoggedIn(true); // Atualiza o estado de login
           window.location.href = '/VenusMars'; // Redireciona após login
         } else {
@@ -84,6 +85,13 @@ function SignPage () {
       console.error("Erro na requisição:", error);
       setStatusMessage({ type: "error", message: "Erro no servidor, tente novamente mais tarde." });
     });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("canRead");
+    setIsLoggedIn(false);
+    window.location.href = '/'; // Redireciona para a página inicial após logout
   };
 
   return (
@@ -110,6 +118,7 @@ function SignPage () {
           ) : (
             <div className="logged-in-message">
               <h2>Você já está logado!</h2>
+              <button onClick={handleLogout} className="logout-button">Deslogar</button>
             </div>
           )}
 
@@ -129,7 +138,7 @@ function SignPage () {
                         onFocus={handleInputFocus}
                         onBlur={handleInputBlur}
                       />
-                      <label className={formData.firstName ? "active" : ""}>
+                      <label className={formData.firstName || formData.firstName === "" ? "active" : ""}>
                         Nome<span className="req">*</span>
                       </label>
                     </div>
@@ -143,8 +152,8 @@ function SignPage () {
                         onFocus={handleInputFocus}
                         onBlur={handleInputBlur}
                       />
-                      <label className={formData.lastName ? "active" : ""}>
-                      Sobrenome<span className="req">*</span>
+                      <label className={formData.lastName || formData.lastName === "" ? "active" : ""}>
+                        Sobrenome<span className="req">*</span>
                       </label>
                     </div>
                   </div>
@@ -159,49 +168,7 @@ function SignPage () {
                       onFocus={handleInputFocus}
                       onBlur={handleInputBlur}
                     />
-                    <label className={formData.email ? "active" : ""}>
-                    E-mail<span className="req">*</span>
-                    </label>
-                  </div>
-
-                  <div className="field-wrap">
-                    <input
-                      type="password"
-                      name="password"
-                      required
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      onFocus={handleInputFocus}
-                      onBlur={handleInputBlur}
-                    />
-                    <label className={formData.password ? "active" : ""}>
-                    Senha<span className="req">*</span>
-                    </label>
-                  </div>
-
-                  <button type="submit" className="button button-block">
-                    Inicie
-                  </button>
-                </form>
-              </div>
-            )}
-
-            {/* Aba de login */}
-            {activeTab === "login" && !isLoggedIn && (
-              <div id="login">
-                <h1>Bem vindo de volta!</h1>
-                <form onSubmit={handleFormSubmit}>
-                  <div className="field-wrap">
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      onFocus={handleInputFocus}
-                      onBlur={handleInputBlur}
-                    />
-                    <label className={formData.email ? "active" : ""}>
+                    <label className={formData.email || formData.email === "" ? "active" : ""}>
                       E-mail<span className="req">*</span>
                     </label>
                   </div>
@@ -216,7 +183,49 @@ function SignPage () {
                       onFocus={handleInputFocus}
                       onBlur={handleInputBlur}
                     />
-                    <label className={formData.password ? "active" : ""}>
+                    <label className={formData.password || formData.password === "" ? "active" : ""}>
+                      Senha<span className="req">*</span>
+                    </label>
+                  </div>
+
+                  <button type="submit" className="button button-block">
+                    Inicie
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {/* Aba de login */}
+            {activeTab === "login" && !isLoggedIn && (
+              <div id="login">
+                <h1>Bem-vindo de volta!</h1>
+                <form onSubmit={handleFormSubmit}>
+                  <div className="field-wrap">
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                    <label className={formData.email || formData.email === "" ? "active" : ""}>
+                      E-mail<span className="req">*</span>
+                    </label>
+                  </div>
+
+                  <div className="field-wrap">
+                    <input
+                      type="password"
+                      name="password"
+                      required
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                    <label className={formData.password || formData.password === "" ? "active" : ""}>
                       Senha<span className="req">*</span>
                     </label>
                   </div>
