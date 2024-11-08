@@ -160,3 +160,15 @@ h1 {
   color: red;
   border: 2px solid red;
 }
+
+.logout-button{
+  background: #ff0000;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 15px;
+  text-align: center;
+  transition: all .5s ease;
+}

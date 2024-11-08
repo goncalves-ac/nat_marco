@@ -73,7 +73,7 @@ function SignPage () {
           localStorage.setItem("isLoggedIn", "true"); // Salva o status de login no localStorage
           localStorage.setItem("canRead", data.canRead); // Salva o status de canRead no localStorage
           setIsLoggedIn(true); // Atualiza o estado de login
-          window.location.href = '/VenusMars'; // Redireciona após login
+          window.location.href = '/#/'; // Redireciona após login
         } else {
           setStatusMessage({ type: "success", message: data.message }); // Mensagem de sucesso no cadastro
         }
