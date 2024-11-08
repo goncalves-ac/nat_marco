@@ -25,12 +25,7 @@
     "lint": "eslint . --max-warnings 100",
     "prebuild": "npm run lint"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+  
   "browserslist": {
     "production": [
       ">0.2%",
