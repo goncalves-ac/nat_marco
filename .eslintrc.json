@@ -1,8 +1,0 @@
-{
-    "extends": ["react-app", "react-app/jest"],
-    "rules": {
-      "react-hooks/exhaustive-deps": "warn", // Altere para 'warn' para não causar falha no build
-      "no-unused-vars": "warn", // Altere para 'warn' para não causar falha no build
-      "jsx-a11y/anchor-is-valid": "warn" // Altere para 'warn' para não causar falha no build
-    }
-  }

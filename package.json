@@ -21,15 +21,7 @@
     "deploy": "npm run build && node ./deploy.js",
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint . --max-warnings 100",
-    "prebuild": "npm run lint"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [

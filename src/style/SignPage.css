@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap");
 
 .form-container {
   display: flex;
@@ -159,4 +159,31 @@ h1 {
 .status.error {
   color: red;
   border: 2px solid red;
+}
+
+.logout-button {
+  background: #db1818;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 15px;
+  text-align: center;
+  transition: all 0.5s ease;
+  border-radius: 10px;
+}
+
+.logged-in-message {  
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  flex-wrap: wrap;
+}
+
+.logged-in-message h2{
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+  margin: 1rem 0;
 }
