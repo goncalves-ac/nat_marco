@@ -8,13 +8,20 @@ const PostItBoard = () => {
     const [readMessages, setReadMessages] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({ id: null, name: '', message: '' });
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 9;
 
     const canRead = JSON.parse(localStorage.getItem('canRead'));
 
     useEffect(() => {
         fetch("https://nataliaemarcos.online/getMessages.php")
             .then((response) => response.json())
-            .then((data) => setMessages(data))
+            .then((data) => {
+                setMessages(data);
+                // Atualizar o estado de mensagens lidas com base no banco de dados
+                const readIds = data.filter((msg) => msg.readed === 1).map((msg) => msg.id);
+                setReadMessages(readIds);
+            })
             .catch((error) => console.error("Erro ao buscar mensagens:", error));
     }, []);
 
@@ -27,7 +34,7 @@ const PostItBoard = () => {
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === "success") {
-                    setReadMessages([...readMessages, id]);
+                    setReadMessages((prevReadMessages) => [...prevReadMessages, id]);
                 } else {
                     console.error("Erro ao marcar mensagem como lida:", data.message);
                 }
@@ -47,6 +54,17 @@ const PostItBoard = () => {
         setModalOpen(false);
     };
 
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    // Lógica para mensagens paginadas
+    const totalPages = Math.ceil(messages.length / itemsPerPage);
+    const currentMessages = messages.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
     return (
         <section>
             <NavBar />
@@ -54,7 +72,7 @@ const PostItBoard = () => {
             {canRead ? (
                 <div className="post-it-board-container">
                     <div className="post-it-board">
-                        {messages.map((msg, index) => {
+                        {currentMessages.map((msg) => {
                             const isRead = readMessages.includes(msg.id);
                             const backgroundColor = isRead ? "#90ee90" : "#e8431570";
                             const rotation = `${Math.random() * 10 - 5}deg`;
@@ -74,6 +92,19 @@ const PostItBoard = () => {
                             );
                         })}
                     </div>
+                    {totalPages > 1 && (
+                        <div className="pagination">
+                            {Array.from({ length: totalPages }, (_, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => handlePageChange(i + 1)}
+                                    className={i + 1 === currentPage ? "active" : ""}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                     {isModalOpen && (
                         <div className="modal" onClick={closeModal}>
                             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
