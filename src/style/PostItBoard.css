@@ -111,9 +111,10 @@
 }
 
 .modal h2 {
-    font-size: 6rem;
-    padding: 8% 5%;
+    font-size: 4rem;
+    padding: 6%;
     color: #e84315;
+    line-height: 4rem;
 }
 
 .modal p {
