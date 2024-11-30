@@ -4,30 +4,35 @@ import NavBar from './../component/NavBar.js';
 import './../style/ConfirmedGuests.css';
 
 const ConfirmedGuestsPage = () => {
-  const [confirmedGuests, setConfirmedGuests] = useState([]);
+  const [guests, setGuests] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   // Verifica se o usuário tem permissão para ver a página
   const canRead = JSON.parse(localStorage.getItem('canRead'));
 
+  
+
   useEffect(() => {
-    const fetchConfirmedGuests = async () => {
+    const fetchGuests = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/rsvps');
-        const data = await response.json();
-        const filteredGuests = data.filter((guest) => guest.conf === true);
-        setConfirmedGuests(filteredGuests);
+       const response = await fetch('https://nataliaemarcos.online/getMessages.php');
+      const data = await response.json();
+
+        // Filtra apenas os convidados com o campo `name` preenchido
+        const filteredGuests = data.filter((guest) => guest.name);
+        setGuests(filteredGuests);
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
       }
     };
-    fetchConfirmedGuests();
+
+    fetchGuests();
   }, []);
 
-  const totalPages = Math.ceil(confirmedGuests.length / itemsPerPage);
+  const totalPages = Math.ceil(guests.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const selectedGuests = confirmedGuests.slice(startIndex, startIndex + itemsPerPage);
+  const selectedGuests = guests.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (page) => setCurrentPage(page);
 
@@ -39,25 +44,28 @@ const ConfirmedGuestsPage = () => {
           <h1>Convidados Confirmados</h1>
           <div className="confirmed-guests-container">
             <ul>
-              {selectedGuests.map((guest, index) => (
-                <li key={index} className="guest-item">
+              {selectedGuests.map((guest) => (
+                <li key={guest.id} className="guest-item">
                   <p><strong>Nome:</strong> {guest.name}</p>
+                  <p><strong>Confirmou presença:</strong> {guest.conf ? 'Sim' : 'Não'}</p>
                   {guest.message && <p><strong>Mensagem:</strong> {guest.message}</p>}
                 </li>
               ))}
             </ul>
 
-            <div className="pagination">
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index}
-                  className={currentPage === index + 1 ? 'active' : ''}
-                  onClick={() => handlePageChange(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              ))}
-            </div>
+            {totalPages > 1 && (
+              <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={currentPage === index + 1 ? 'active' : ''}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </>
       ) : (
