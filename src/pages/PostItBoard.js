@@ -1,67 +1,51 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "./../component/NavBar.js";
-import Countdown from "./../component/Countdown.js";
+import NavBar from './../component/NavBar.js';
+import Countdown from './../component/Countdown.js';
 import "./../style/PostItBoard.css";
 
 const PostItBoard = () => {
     const [messages, setMessages] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(9);
+    const [readMessages, setReadMessages] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
-    const [modalContent, setModalContent] = useState({ name: "", message: "" });
+    const [modalContent, setModalContent] = useState({ id: null, name: '', message: '' });
 
-    const canRead = JSON.parse(localStorage.getItem("canRead"));
+    const canRead = JSON.parse(localStorage.getItem('canRead'));
 
     useEffect(() => {
-        // Fetch messages from API
         fetch("https://nataliaemarcos.online/getMessages.php")
             .then((response) => response.json())
             .then((data) => setMessages(data))
             .catch((error) => console.error("Erro ao buscar mensagens:", error));
     }, []);
 
-    useEffect(() => {
-        const updateItemsPerPage = () => {
-            setItemsPerPage(window.innerWidth < 1051 ? messages.length : 9);
-        };
-        updateItemsPerPage();
-        window.addEventListener("resize", updateItemsPerPage);
-
-        return () => window.removeEventListener("resize", updateItemsPerPage);
-    }, [messages.length]);
-
-    const handlePageChange = (page) => setCurrentPage(page);
-
-    const openModal = (msg) => {
-        setModalContent(msg);
-        setModalOpen(true);
-
-        // Mark message as read
+    const markAsRead = (id) => {
         fetch("https://nataliaemarcos.online/getMessages.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: msg.id }),
+            body: JSON.stringify({ id }),
         })
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === "success") {
-                    setMessages((prevMessages) =>
-                        prevMessages.map((message) =>
-                            message.id === msg.id ? { ...message, readed: 1 } : message
-                        )
-                    );
+                    setReadMessages([...readMessages, id]);
+                } else {
+                    console.error("Erro ao marcar mensagem como lida:", data.message);
                 }
             })
             .catch((error) => console.error("Erro ao marcar mensagem como lida:", error));
     };
 
-    const closeModal = () => setModalOpen(false);
+    const openModal = (msg) => {
+        setModalContent(msg);
+        setModalOpen(true);
+        if (!readMessages.includes(msg.id)) {
+            markAsRead(msg.id);
+        }
+    };
 
-    const totalPages = Math.ceil(messages.length / itemsPerPage);
-    const currentMessages = messages.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const closeModal = () => {
+        setModalOpen(false);
+    };
 
     return (
         <section>
@@ -70,47 +54,30 @@ const PostItBoard = () => {
             {canRead ? (
                 <div className="post-it-board-container">
                     <div className="post-it-board">
-                        {currentMessages.map((msg) => (
-                            <div
-                                key={msg.id}
-                                className="post-it"
-                                style={{
-                                    backgroundColor: msg.readed ? "#e8431570" : "#ffff8d",
-                                    transform: `rotate(${Math.random() * 10 - 5}deg)`,
-                                }}
-                                onClick={() => openModal(msg)}
-                            >
-                                <div className="post-it-name">{msg.name}</div>
-                                <div className="post-it-message">
-                                    {msg.message.length > 50
-                                        ? msg.message.slice(0, 50) + "..."
-                                        : msg.message}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    {totalPages > 1 && (
-                        <div className="pagination">
-                            {Array.from({ length: totalPages }, (_, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => handlePageChange(i + 1)}
-                                    className={i + 1 === currentPage ? "active" : ""}
+                        {messages.map((msg, index) => {
+                            const isRead = readMessages.includes(msg.id);
+                            const backgroundColor = isRead ? "#90ee90" : "#e8431570";
+                            const rotation = `${Math.random() * 10 - 5}deg`;
+                            const truncatedMessage = msg.message.length > 50 ? msg.message.slice(0, 50) + "..." : msg.message;
+
+                            return (
+                                <div
+                                    key={msg.id}
+                                    className="post-it"
+                                    style={{ backgroundColor, transform: `rotate(${rotation})` }}
+                                    onClick={() => openModal(msg)}
                                 >
-                                    {i + 1}
-                                </button>
-                            ))}
-                        </div>
-                    )}
+                                    <div className="post-it-name">{msg.name}</div>
+                                    <div className="post-it-message">{truncatedMessage}</div>
+                                    {isRead && <span className="checkmark">&#10003;</span>}
+                                </div>
+                            );
+                        })}
+                    </div>
                     {isModalOpen && (
                         <div className="modal" onClick={closeModal}>
-                            <div
-                                className="modal-content"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                <span className="close" onClick={closeModal}>
-                                    &times;
-                                </span>
+                            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                                <span className="close" onClick={closeModal}>&times;</span>
                                 <h2>{modalContent.name}</h2>
                                 <p>{modalContent.message}</p>
                             </div>
