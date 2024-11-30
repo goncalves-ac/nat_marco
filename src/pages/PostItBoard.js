@@ -18,7 +18,7 @@ const PostItBoard = () => {
             .then((response) => response.json())
             .then((data) => {
                 setMessages(data);
-                // Atualizar o estado de mensagens lidas com base no banco de dados
+                // Extrair IDs das mensagens lidas e atualizar o estado
                 const readIds = data.filter((msg) => msg.readed === 1).map((msg) => msg.id);
                 setReadMessages(readIds);
             })
